@@ -53,17 +53,19 @@ target_include_directories(SKL
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         #$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         #$<INSTALL_INTERFACE:include>
-        ${Boost_INCLUDE_DIRS}
 )
 
 target_link_libraries(SKL
     INTERFACE
         project_options
-        #project_warnings
-        OpenMP::OpenMP_CXX
+        project_warnings
 )
 
 if(ENABLE_SHARED_MEMORY_LAYER)
+target_link_libraries(SKL
+    INTERFACE
+        OpenMP::OpenMP_CXX
+)
 target_compile_definitions(skl
     INTERFACE
         SKL_SM)
