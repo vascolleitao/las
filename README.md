@@ -148,15 +148,26 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [X] Shared memory layer
-    - [X] OMP support
-    - [X] C++11 threads support
-    - [ ] TBB support
-- [X] Distributed memory layer
-    - [ ] MPI support
-- [ ] GPU layer
-    - [ ] CUDA support
-    - [ ] OpenCL suport
+- Skeletons
+    - [X] Map
+    - [X] Reduce
+    - [X] Fusion
+    - [ ] Filter
+- Adapters
+    - [X] Simple
+    - [X] Index
+    - [X] Zip
+    - [] Reverse
+- Parallelization
+    - [X] Shared memory layer
+        - [X] OMP support
+        - [X] C++11 threads support
+        - [ ] TBB support
+    - [X] Distributed memory layer
+        - [ ] MPI support
+    - [ ] GPU layer
+        - [ ] CUDA support
+        - [ ] OpenCL suport
 
 See the [open issues](https://github.com/vascolleitao/skl/issues) for a full list of proposed features (and known issues).
 
