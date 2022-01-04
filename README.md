@@ -157,13 +157,13 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [X] Simple
     - [X] Index
     - [X] Zip
-    - [] Reverse
+    - [ ] Reverse
 - Parallelization
     - [X] Shared memory layer
         - [X] OMP support
         - [X] C++11 threads support
         - [ ] TBB support
-    - [X] Distributed memory layer
+    - [ ] Distributed memory layer
         - [ ] MPI support
     - [ ] GPU layer
         - [ ] CUDA support
