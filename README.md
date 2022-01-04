@@ -97,10 +97,14 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
+The prerequisite to install library are
+* Compiler
+    A CXX compiler with standard C++20
 * OpenMP
-  ```sh
-  brew install libomp
-  ```
+    Can be installed via brew
+    ```sh
+    brew install libomp
+    ```
 
 ### Installation
 
@@ -144,10 +148,15 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature
+- [X] Shared memory layer
+    - [X] OMP support
+    - [X] c++11 threads support
+    - [ ] TBB support
+- [X] Distributed memory layer
+    - [ ] MPI support
+- [ ] GPU support
+    - [ ] CUDA support
+    - [ ] OpenCL suport
 
 See the [open issues](https://github.com/vascolleitao/skl/issues) for a full list of proposed features (and known issues).
 
