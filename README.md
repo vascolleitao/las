@@ -150,11 +150,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 - [X] Shared memory layer
     - [X] OMP support
-    - [X] c++11 threads support
+    - [X] C++11 threads support
     - [ ] TBB support
 - [X] Distributed memory layer
     - [ ] MPI support
-- [ ] GPU support
+- [ ] GPU layer
     - [ ] CUDA support
     - [ ] OpenCL suport
 
