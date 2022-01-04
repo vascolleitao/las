@@ -5,21 +5,18 @@
 #include <skl/skl.hpp>
 
 
-auto print_vector = [](auto& v, std::string const& label)
-{
-       std::cout << label << ": ";
-       for(const int& i: v) std::cout << i << ", ";
-       std::cout << std::endl;
-};
 
 
 int main(int /*argc*/, const char ** /*argv*/)
 {
-  std::vector<int> v{1,2,3,4,5,6,7,8,9,10};
+  std::vector<int> vec(1000);
 
-  struct inc { void operator()(int& x) { x++; } };
-  skl::composition(v , skl::map(inc()) );
-  print_vector(v , "Simple Aggregate increment");
+  auto inc = [](int& x) { ++x; };
 
-  return 0;
+  skl::composition(vec, skl::map(inc));
+  
+  int not_incremented = 0; 
+  for(auto i = vec.begin(); i != vec.end(); ++i) not_incremented += (*i!=1);
+
+  return not_incremented;
 }

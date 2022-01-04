@@ -2,20 +2,17 @@
 
 ## Building
 ```
-# build library
-mkdir build
-cd build
-
-# or bulid using boost zip iterator
-cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_BOOST_BUILD=ON ..
-make
+git clone git@github.com:vascolleitao/skl.git
+cmake -B build -S skl
+cmake --build build
+ctest --ctest-dir build
 ```
 ## Install
 ```
-make install
+cmake --install build \
+      --prefix <INSTALL-DIR> \
+      --component skl
 ```
-
-
 
 ## Test
 

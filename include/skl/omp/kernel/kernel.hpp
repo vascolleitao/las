@@ -3,6 +3,7 @@
 #include <omp.h>
 
 #include <skl/omp/kernel/scheduler.hpp>
+#include <type_traits>
 
 
 namespace skl::omp

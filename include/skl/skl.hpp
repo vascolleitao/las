@@ -30,5 +30,20 @@ namespace skl
   {
     return composition(aggregate::zip<decltype(collection)>(collection), std::forward<Skeletons>(skeletons)...);
   }
+
+
+  /* 
+  template<typename Aggregeate>
+  auto execute(const Aggregeate& a)
+  {
+    return [&a](auto skeleton)
+      {
+        kernel<Aggregeate, decltype(skeleton)>(a, skeleton)
+      };
+  }
+
+  skl::execute(v)(map(inc));
+ */
+
 } // namespace skl
 

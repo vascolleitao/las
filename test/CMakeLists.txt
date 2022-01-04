@@ -1,19 +1,15 @@
-find_package(Boost 1.71.0 REQUIRED)
 
-#test_filter
-foreach(TEST test_simple test_map test_reduce test_zip)
-    add_executable(${TEST} ${TEST}.cpp)
-    target_link_libraries(${TEST}
-        PRIVATE
-            ${LIBRARY_SKL3}
-    )
+set(TEST_LIST "zip;adapter;map;fusion;reduce")
+
+foreach(TEST ${TEST_LIST})
+    # Sequential tests
+    add_executable(${TEST} test_${TEST}.cpp)
+    target_link_libraries(${TEST} PRIVATE SKL)
+    add_test(SEQ_${TEST} ${TEST})
+    # OMP tests
+    add_executable(omp_${TEST} test_${TEST}.cpp)
+    target_link_libraries(omp_${TEST} PRIVATE SKL)
+    target_compile_definitions(omp_${TEST} PRIVATE SKL_OMP)
+    add_test(OMP_${TEST} omp_${TEST})
 endforeach()
 
-foreach(TEST test_simple test_map test_reduce test_zip)
-    add_executable(sm_${TEST} ${TEST}.cpp)
-    target_link_libraries(sm_${TEST}
-        PRIVATE
-            ${LIBRARY_SKL3}
-    )
-    target_compile_definitions(sm_${TEST} PRIVATE SKL_OMP)
-endforeach()
