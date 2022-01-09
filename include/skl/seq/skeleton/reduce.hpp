@@ -1,49 +1,63 @@
 #pragma once
 
 #include <utility>
+#include <tuple>
 
-namespace skl::skeleton::detail
+namespace skl
 {
-  template<typename Fn>
-  struct reduce_impl
+  namespace skeleton
   {
-    using reduction_t = typename std::decay_t<Fn>::result_type;
-    Fn& fn_;
-    reduction_t reduction_;
-
-    explicit reduce_impl(Fn& fn) : fn_(fn) { }
-
-    template<typename Iterator>
-    void pre_for(Iterator&& ite)
+    template<typename Function>
+    struct reduce_wrapper
     {
-      reduction_ = ite;
-    }
+      using reduction_t = typename std::decay_t<Function>::result_type;
+      Function function_;
+      reduction_t reduction_;
+      bool first_;
 
-    template<typename Iterator>
-    void inside_for(Iterator&& ite)
+      reduce_wrapper(Function function)
+        : function_(function)
+      {
+      }
+
+      template<typename Iterator>
+      constexpr int init(Iterator&& ite)
+      {
+        reduction_ = *ite;
+        return 0;
+      }
+
+      template<typename Iterator>
+      constexpr int kernel(Iterator&& ite)
+      {
+        reduction_ = function_(reduction_, *ite);
+        return 0;
+      }
+
+      constexpr auto finish()
+      {
+        return std::make_tuple(reduction_);
+      }
+    };
+
+    template<typename T>
+    struct is_reduce : std::false_type
     {
-      reduction_ = fn_(reduction_, ite);
-    }
+    };
 
-    auto post_for()
+    template<typename Function>
+    struct is_reduce<reduce_wrapper<Function>> : std::true_type
     {
-      return std::make_tuple(reduction_);
-    }
-  };
-} // skl::skeleton::detail
+    };
+
+    template<typename T>
+    concept reducible = is_reduce<T>::value;
+  }// namespace skeleton
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  template<typename Function>
+  skeleton::reduce_wrapper<Function> reduce(Function&& function)
+  {
+    return skeleton::reduce_wrapper<Function>(function);
+  }
+}// namespace skl

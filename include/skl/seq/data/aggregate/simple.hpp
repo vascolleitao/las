@@ -1,6 +1,6 @@
 #pragma once
 
-#include <functional>
+#include <type_traits>
 
 namespace skl
 {
@@ -9,24 +9,32 @@ namespace skl
     template<typename Collection>
     struct simple
     {
-      using iterator = typename std::decay_t<Collection>::iterator;
+      //using iterator = typename std::decay_t<Collection>::iterator;
 
       Collection &&collection_;
 
       explicit simple(Collection &&collection)
         : collection_(std::forward<Collection>(collection))
-      {}
+      { }
 
-      iterator begin() { return collection_.begin(); }
-      iterator end() { return collection_.end(); }
+      auto begin() { return collection_.begin(); }
+      auto end() { return collection_.end(); }
     };
   } // aggregate
 
-  // as a function for automatic type deduction
   template<typename Collection>
   auto simple(Collection &&collection)
   {
-    return aggregate::simple<Collection>(std::forward<Collection>(collection));
+    //return aggregate::simple<Collection>(std::forward<Collection>(collection));
+    return [&collection](auto skeleton)
+    {
+      using Simple = skl::aggregate::simple<Collection>;
+      using Skeleton = decltype(skeleton);
+      return kernel <Simple, Skeleton> ( 
+          Simple(std::forward<Collection>(collection)), 
+          std::forward<Skeleton>(skeleton)
+          ).execute();
+    };
   }
 
 } // skl

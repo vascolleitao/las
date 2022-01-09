@@ -10,7 +10,8 @@ namespace skl::scheduler
     constant(size_t id, size_t n_threads)
       : id_(id)
       , n_threads_(n_threads)
-    { }
+    {
+    }
 
     template<typename Index>
     std::tuple<Index, Index> next(const Index begin, const Index end)
@@ -23,5 +24,4 @@ namespace skl::scheduler
       return { b, (e < end ? e : end) };
     }
   };
-} // skl::scheduler
-
+}// namespace skl::scheduler
