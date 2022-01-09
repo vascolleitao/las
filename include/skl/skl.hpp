@@ -21,7 +21,7 @@ namespace skl
 
 #include <skl/seq/layer.hpp>
 #ifdef SKL_OMP
-//#include <skl/omp/layer.hpp>
+#include <skl/omp/layer.hpp>
 #endif
 
 namespace skl

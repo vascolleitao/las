@@ -20,5 +20,5 @@ int main(int /*argc*/, const char** /*argv*/)
 
   int real_sum = 0;
   for (auto i = vec.begin(); i != vec.end(); ++i) real_sum += *i;
-  return sum == real_sum;
+  return sum != real_sum;
 }
