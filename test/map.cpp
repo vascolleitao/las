@@ -8,7 +8,7 @@
 #include <skl/skl.hpp>
 
 
-int main([[maybe_unused]] int argc, [[maybe_unused]] const char** argv)
+int main(int, const char**)
 {
   std::vector<int> vec(10);
 
@@ -16,9 +16,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char** argv)
 
   auto inc = [](int& x)
   { ++x; };
-  [[maybe_unused]] auto mul = [](int& x)
-  { x *= 2; };
-  // vec >>= skl::map(inc) >>= skl::map(mul);
+
   vec >>= skl::map(inc);
 
   fmt::print("vector {}\n", vec);
