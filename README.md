@@ -98,6 +98,7 @@ By cloning a local copy up and running follow these simple example steps.
 
 The prerequisite to install library the full libarary are: 
 * C++ compiler with standard C++20
+
 Depending on the paralelization layer you may also need:
 * OpenMP 
 
@@ -207,16 +208,7 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-~~~
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
 
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-~~~
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -233,6 +225,6 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 [license-url]: https://github.com/vascolleitao/skl/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vascolleitao
-```
+
 
 
