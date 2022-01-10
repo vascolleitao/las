@@ -8,7 +8,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmt)
 
 # set(TEST_LIST "zip;adapter;map;fusion;reduce")
-set(TEST_LIST "map;reduce;fusion")
+set(TEST_LIST "map;reduce;fusion;filter")
 
 foreach(TEST ${TEST_LIST})
  # Sequential tests

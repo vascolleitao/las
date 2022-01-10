@@ -82,7 +82,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project was 
+This project is still being develop. SKL aims to be a flexible and portable algoritmic library, capable of achiving good performing, with multiple layers of paralelizaion to adapt for diferent kinds of hardware arquitecture. Easy to use.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -91,20 +91,15 @@ This project was
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is an example of how you may set up SKL project locally.
+By cloning a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-The prerequisite to install library are
-* Compiler
-    A CXX compiler with standard C++20
-* OpenMP
-    Can be installed via brew
-    ```sh
-    brew install libomp
-    ```
+The prerequisite to install library the full libarary are: 
+* C++ compiler with standard C++20
+Depending on the paralelization layer you may also need:
+* OpenMP 
 
 ### Installation
 
@@ -113,16 +108,16 @@ The prerequisite to install library are
     git clone https://github.com/vascolleitao/skl.git
     ```
 2. Building
-    ```
+    ```sh
     cmake -B build -S skl
     cmake --build build
     ```
 3. Testing
-    ```
+    ```sh
     ctest --ctest-dir build
     ```
 4. Installing
-    ```
+    ```sh
     cmake --install build \
           --prefix <INSTALL-DIR> \
           --component skl
@@ -160,14 +155,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [ ] Reverse
 - Parallelization
     - [X] Shared memory layer
-        - [X] OMP support
-        - [X] C++11 threads support
-        - [ ] TBB support
+        - [X] OMP 
+        - [X] C++11 threads 
+        - [ ] TBB 
     - [ ] Distributed memory layer
-        - [ ] MPI support
+        - [ ] MPI 
     - [ ] GPU layer
-        - [ ] CUDA support
-        - [ ] OpenCL suport
+        - [ ] CUDA 
+        - [ ] OpenCL 
 
 See the [open issues](https://github.com/vascolleitao/skl/issues) for a full list of proposed features (and known issues).
 
@@ -212,7 +207,7 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
+~~~
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
@@ -221,7 +216,7 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 * []()
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
+~~~
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

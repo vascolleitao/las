@@ -2,26 +2,27 @@
 #include <iostream>
 #include <vector>
 
+#include <fmt/core.h>
+#include <fmt/ranges.h>
+
 #include <skl/skl.hpp>
 
+auto even = [](auto& x) -> bool
+{ return (x % 2) == 0; };
+auto clear = [](auto& x)
+{ return x = 0; };
 
-
-
-int main(int /*argc*/, const char ** /*argv*/)
+int main(int /*argc*/, const char** /*argv*/)
 {
-  const size_t size(1000);
-  std::vector<int> vec(size);
+  std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-  auto inc = [](int i, std::vector<int>& v){ ++v[i]; };
-  auto even = [](int i, std::vector<int>& v){ return i%2; };
+  fmt::print("vector {}\n", vec);
 
-  /*
-  skl::composition(skl::zip(skl::index(vec))
-      , skl::map(inc)
-      , filter(even)
-      , skl::reduce()
-  );
-  */
+  vec
+    >>= skl::filter(even)
+    >>= skl::map(clear);
+
+  fmt::print("vector {}\n", vec);
 
   return 1;
 }

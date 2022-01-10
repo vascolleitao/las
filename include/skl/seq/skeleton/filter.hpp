@@ -5,42 +5,33 @@ namespace skl
 {
   namespace skeleton
   {
-    namespace detail
+    template<typename Predicate>
+    struct filter_wrapper
     {
-      template<typename Fn, typename ArgsFilter, typename Super>
-      struct filter_impl : Super
+      template<typename Iterator>
+      constexpr int init(Iterator&& ite)
       {
-        Fn& fn_;
-        ArgsFilter args_filter_;
+        return predicate_(*ite);
+      }
 
-        filter_impl(Fn& predicate, ArgsFilter& args_filter, Super s)
-          : Super(s)
-          , fn_(predicate)
-          , args_filter_(args_filter)
-        {}
+      template<typename Iterator>
+      constexpr int kernel(Iterator&& ite)
+      {
+        return predicate_(*ite);
+      }
 
-        template<typename Iterator, typename Super_f>
-        void kernel(Iterator&& ite, Super_f&& super_f)
-        {
-          auto&& filtered_args = std::invoke(args_filter_, ite);
-          if(std::apply(fn_, filtered_args)) super_f(std::forward<Iterator>(ite));
-        }
+      constexpr void finish()
+      {
+        return;
+      }
 
-        template<typename Iterator>
-        void pre_for(Iterator&& ite)
-        {
-          return kernel(std::forward<Iterator>(ite),
-             [this](auto&& ite){ return Super::pre_for(std::forward<Iterator>(ite)); });
-        }
+      Predicate predicate_;
+    };
 
-        template<typename Iterator>
-        void inside_for(Iterator&& ite)
-        {
-          return kernel(std::forward<Iterator>(ite),
-            [this](auto&& ite){ return Super::inside_for(std::forward<Iterator>(ite)); });
-        }
-      };
-    } // detail
-
-  } // skeleton
-} // skl
+  }// namespace skeleton
+  template<typename Function>
+  skeleton::filter_wrapper<Function> filter(Function&& function)
+  {
+    return skeleton::filter_wrapper<Function>{ function };
+  }
+}// namespace skl

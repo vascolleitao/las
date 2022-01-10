@@ -52,6 +52,7 @@ namespace skl
 
     template<typename T>
     concept reducible = is_reduce<T>::value;
+    // concept reducible = is_reduce<std::decay_t<T>>::value;
   }// namespace skeleton
 
 
