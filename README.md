@@ -133,7 +133,58 @@ Depending on the paralelization layer you may also need:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+# An example of using the map skeleton
+
+Here is a simple example of incrementing all the elements of a collection:
+
+```cpp
+std::vector<int> vec(1000);
+vec >>= skl::map(inc());
+```
+
+# An example of using the reduce skeleton
+
+This example show how to summ all the elemnts of one collection.
+
+```cpp
+std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+auto [sum] = vec >>= skl::reduce(std::plus<int>());
+```
+
+# Example: Fusion multiple skeletons together
+
+This example shows the fusion of two reduces. This operation returns a tuple, the first element corresponds to the result of the first reduce and the second element two the second reduce fused.
+
+```cpp
+std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+auto [min, max] = vec
+  >>= skl::reduce(skl::min<int>())
+  >>= skl::reduce(skl::max<int>());
+```
+
+Note that in this example the first reduce is applyed to the original collection and the second reduce is applyed after computing the "complex_computation" on all elements of the collection. But both reduces are computed with only one loop, like lazy evaluation.
+
+```cpp
+const size_t size(1000);
+std::vector<int> vec(size);
+const int expected_sum_before_map = 0;
+const int expected_sum_after_map = size;
+
+auto [sum_before_map, sum_after_map] = vec
+  >>= skl::reduce(std::plus<int>())
+  >>= skl::map(complex_computation())
+  >>= skl::reduce(std::plus<int>());
+```
+
+# Example: Skeleton filter
+
+I this example a filter is used to erase the even numbers of a collection by applyn the skeleton map with the functor clear to the filtered ones. 
+```cpp
+std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+vec
+  >>= skl::filter(even())
+  >>= skl::map(clear());
+```
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
