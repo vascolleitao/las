@@ -82,7 +82,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is still being develop. SKL aims to be a flexible and portable algoritmic library, capable of achiving good performing, with multiple layers of paralelizaion to adapt for diferent kinds of hardware arquitecture. Easy to use.
+SKL aims to be an easy to use library. SKL achieves this by encapsulating all of the parallel code inside the skeletons, so that the user wont need to know/code anything related to parallelization. The user only needs to know the semantics of the skletons.
+
+SKL is capable of achieving good performing, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. 
+
+SKL has the ability to activate and deactivate specific layers at compile adapting the implementation of the skeletons to diferent kinds of hardware arquitectures. SKL can activate multiple layers at the same time wich makes hybrid layers of parallelizaion possibly like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algoritmic library.  
+
+
+SKL started as a master dissertation project with the aim of giving HPC/parallel solutions a better architecture. SKL is, as refered, an algoritmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project. SKL is still being develop. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -133,7 +140,7 @@ Depending on the paralelization layer you may also need:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-# An example of using the map skeleton
+### An example of using the map skeleton
 
 Here is a simple example of incrementing all the elements of a collection:
 
@@ -142,7 +149,7 @@ std::vector<int> vec(1000);
 vec >>= skl::map(inc());
 ```
 
-# An example of using the reduce skeleton
+### An example of using the reduce skeleton
 
 This example show how to summ all the elemnts of one collection.
 
@@ -151,7 +158,7 @@ std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 auto [sum] = vec >>= skl::reduce(std::plus<int>());
 ```
 
-# Example: Fusion multiple skeletons together
+### Example: Fusion multiple skeletons together
 
 This example shows the fusion of two reduces. This operation returns a tuple, the first element corresponds to the result of the first reduce and the second element two the second reduce fused.
 
@@ -165,20 +172,16 @@ auto [min, max] = vec
 Note that in this example the first reduce is applyed to the original collection and the second reduce is applyed after computing the "complex_computation" on all elements of the collection. But both reduces are computed with only one loop, like lazy evaluation.
 
 ```cpp
-const size_t size(1000);
-std::vector<int> vec(size);
-const int expected_sum_before_map = 0;
-const int expected_sum_after_map = size;
-
+std::vector<int> vec(100);
 auto [sum_before_map, sum_after_map] = vec
   >>= skl::reduce(std::plus<int>())
   >>= skl::map(complex_computation())
   >>= skl::reduce(std::plus<int>());
 ```
 
-# Example: Skeleton filter
+### Example: Skeleton filter
 
-I this example a filter is used to erase the even numbers of a collection by applyn the skeleton map with the functor clear to the filtered ones. 
+In this example a filter is used to erase the even numbers of a collection by applyn the skeleton map with the functor clear to the filtered ones. 
 ```cpp
 std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 vec
