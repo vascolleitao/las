@@ -172,11 +172,7 @@ auto [min, max] = vec
 Note that in this example the first reduce is applyed to the original collection and the second reduce is applyed after computing the "complex_computation" on all elements of the collection. But both reduces are computed with only one loop, like lazy evaluation.
 
 ```cpp
-const size_t size(1000);
-std::vector<int> vec(size);
-const int expected_sum_before_map = 0;
-const int expected_sum_after_map = size;
-
+std::vector<int> vec(100);
 auto [sum_before_map, sum_after_map] = vec
   >>= skl::reduce(std::plus<int>())
   >>= skl::map(complex_computation())
