@@ -82,14 +82,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-SKL aims to be an easy to use library. SKL achieves this by encapsulating all of the parallel code inside the skeletons, so that the user doesnt need to know/code anything related to parallelization. The user only needs to know the semantics of the skletons.
+SKL aims to be an easy to use library. SKL achieves this by encapsulating all of the parallel code inside the skeletons, so that the user wont need to know/code anything related to parallelization. The user only needs to know the semantics of the skletons.
 
-SKL is capable of achieving good performing, because the coupling with the parallelization layes is made at compile time with the use of inheritance and templates. 
+SKL is capable of achieving good performing, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. 
 
-SKL has the ability to activate and deactivate specific layers at compile adapting the implementation of the skeletons to diferent kinds of hardware arquitecture. SKL can activate multiple layers at the same time wich makes hybrid layers of paralelizaion possibly like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algoritmic library.  
+SKL has the ability to activate and deactivate specific layers at compile adapting the implementation of the skeletons to diferent kinds of hardware arquitectures. SKL can activate multiple layers at the same time wich makes hybrid layers of parallelizaion possibly like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algoritmic library.  
 
 
-SKL started as a master dissertation project with the aim of giving HPC/parallel solutions a better architecture. SKL is, as refered, an algoritmic skeleton library implmenting the skeletons with multiple layers of paralleization. This is a fork of the original private project. SKL is still being develop. 
+SKL started as a master dissertation project with the aim of giving HPC/parallel solutions a better architecture. SKL is, as refered, an algoritmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project. SKL is still being develop. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
