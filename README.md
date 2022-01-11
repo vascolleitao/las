@@ -140,7 +140,7 @@ Depending on the paralelization layer you may also need:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-# An example of using the map skeleton
+### An example of using the map skeleton
 
 Here is a simple example of incrementing all the elements of a collection:
 
@@ -149,7 +149,7 @@ std::vector<int> vec(1000);
 vec >>= skl::map(inc());
 ```
 
-# An example of using the reduce skeleton
+### An example of using the reduce skeleton
 
 This example show how to summ all the elemnts of one collection.
 
@@ -158,7 +158,7 @@ std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 auto [sum] = vec >>= skl::reduce(std::plus<int>());
 ```
 
-# Example: Fusion multiple skeletons together
+### Example: Fusion multiple skeletons together
 
 This example shows the fusion of two reduces. This operation returns a tuple, the first element corresponds to the result of the first reduce and the second element two the second reduce fused.
 
@@ -183,7 +183,7 @@ auto [sum_before_map, sum_after_map] = vec
   >>= skl::reduce(std::plus<int>());
 ```
 
-# Example: Skeleton filter
+### Example: Skeleton filter
 
 In this example a filter is used to erase the even numbers of a collection by applyn the skeleton map with the functor clear to the filtered ones. 
 ```cpp
