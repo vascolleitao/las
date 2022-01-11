@@ -1,35 +1,27 @@
 cmake_minimum_required(VERSION 3.15)
-project(SKL CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-################################################################################
-### Project ####################################################################
-################################################################################
+# Project ####################################################################
+
+project(SKL VERSION 0.1.0)
+configure_file(include/skl/config.hpp.in "${CMAKE_CURRENT_SOURCE_DIR}/include/skl/config.hpp")
 
 include(cmake/ProjectSettings.cmake)
-
-if (NOT EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
-  if (NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
-  endif()
-endif()
+include(cmake/CompilerWarnings.cmake)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
-add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_20)
-target_compile_options(project_options
-    INTERFACE
-        #-save-temps
-        #-fno-omit-frame-pointer
-        -march=native)
+add_library(skl_options INTERFACE)
+target_compile_options(skl_options INTERFACE -march=native) # -save-temps -fno-omit-frame-pointer
+# target_compile_features(skl_options INTERFACE cxx_std_2b)
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
-add_library(project_warnings INTERFACE)
-include(cmake/CompilerWarnings.cmake)
-set_project_warnings(project_warnings)
+add_library(skl_warnings INTERFACE)
+set_project_warnings(skl_warnings)
 
 # sanitizer options if supported by compiler
 include(cmake/Sanitizers.cmake)
-enable_sanitizers(project_options)
+# enable_sanitizers(skl_options)
 
 # allow for static analysis options
 include(cmake/StaticAnalyzers.cmake)
@@ -38,39 +30,22 @@ include(cmake/StaticAnalyzers.cmake)
 include(cmake/Doxygen.cmake)
 enable_doxygen()
 
-################################################################################
-### Library ####################################################################
-################################################################################
+# Library #######################################################
 
-
-#find_package(Boost 1.71.0 REQUIRED)
-find_package(OpenMP REQUIRED)
-
-add_library(SKL INTERFACE)
-
-target_include_directories(SKL
-    INTERFACE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        #$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
-        #$<INSTALL_INTERFACE:include>
-        ${Boost_INCLUDE_DIRS}
-)
-
-target_link_libraries(SKL
-    INTERFACE
-        project_options
-        #project_warnings
-        OpenMP::OpenMP_CXX
-)
+add_library(skl INTERFACE)
+target_link_libraries(skl INTERFACE skl_options skl_warnings)
+target_include_directories(skl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+# $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include> $<INSTALL_INTERFACE:include>
 
 if(ENABLE_SHARED_MEMORY_LAYER)
-target_compile_definitions(skl
-    INTERFACE
-        SKL_SM)
+ find_package(OpenMP REQUIRED)
+ add_library(skl_omp_layer INTERFACE)
+ target_link_libraries(skl_omp_layer INTERFACE OpenMP::OpenMP_CXX)
+ target_compile_definitions(skl_omp_layer INTERFACE SKL_OMP)
+ target_link_libraries(skl INTERFACE skl_omp_layer)
 endif()
-
 
 enable_testing()
 add_subdirectory(test)
 
-add_subdirectory(examples)
+# add_subdirectory(examples)

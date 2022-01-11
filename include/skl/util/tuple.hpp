@@ -1,4 +1,6 @@
 #pragma once
+
+#include <cstddef>
 #include <tuple>
 
 namespace skl::util::tuple::detail
@@ -32,7 +34,7 @@ namespace skl::util::tuple::detail
   struct gens<0, S...> { typedef seq<S...> type; };
 
   template<template<typename...> class Tup1, template<typename...> class Tup2, typename... A, typename... B, std::size_t... S>
-  auto zip_helper(Tup1<A...> t1, Tup2<B...> t2, seq<S...> s) -> decltype(std::make_tuple(std::make_pair(std::get<S>(t1), std::get<S>(t2))...))
+  auto zip_helper(Tup1<A...> t1, Tup2<B...> t2, [[maybe_unused]]seq<S...> s) -> decltype(std::make_tuple(std::make_pair(std::get<S>(t1), std::get<S>(t2))...))
   {
     return std::make_tuple(std::make_pair(std::get<S>(t1), std::get<S>(t2))...);
   }

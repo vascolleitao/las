@@ -21,42 +21,47 @@ namespace skl::iterator
     dummy& operator++() { return *this; }
     dummy operator++(int) { dummy tmp = *this; return tmp; }
     dummy& operator+=(const long int) { return *this; }
-    friend bool operator== (const dummy& a, const dummy& b) { return true; };
-    friend bool operator!= (const dummy& a, const dummy& b) { return true; };
+    friend bool operator== ([[maybe_unused]]const dummy& lhs, [[maybe_unused]]const dummy& rhs) { return true; };
+    friend bool operator!= ([[maybe_unused]]const dummy& lhs, [[maybe_unused]]const dummy& rhs) { return true; };
 
   private:
     Data_t* m_ptr;
   };
 
-/*
+} // namespace skl::iterator
+
+
+namespace skl::aggregate
+{
   template<typename Data_t>
   struct dummy
   {
+    using iterator = skl::iterator::dummy<Data_t>;
+
     Data_t var_;
 
-    explicit dummy(Data_t var) : var_(var) {}
+    explicit dummy(Data_t&& var)
+      : var_(std::forward<Data_t>(var))
+    {}
 
-    void operator++()
+    iterator begin()
     {
-      var_ = Data_t();
+      return iterator(&var_);
     }
 
-    template<typename IndexIterator>
-    bool operator!=(const IndexIterator& other) const
+    iterator end()
     {
-      return true;
-    }
-
-    template<typename IndexIterator>
-    bool operator==(const IndexIterator& other) const
-    {
-      return false;
-    }
-
-    auto operator*()
-    {
-      return std::ref(var_);
+      return iterator(&var_);
     }
   };
-  */
-} // namespace skl::iterator
+} // skl::aggregate
+
+namespace skl
+{
+  // as a function for automatic type deduction
+  template<typename Data_t>
+  auto dummy(Data_t&& var)
+  {
+    return aggregate::dummy<Data_t>(std::forward<Data_t>(var));
+  }
+} // skl

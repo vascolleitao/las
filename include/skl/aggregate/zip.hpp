@@ -1,9 +1,18 @@
 #pragma once
 
-
-#include <skl/util/tuple.hpp>
+#include "skl/util/tuple.hpp"
 #include <tuple>
 #include <type_traits>
+
+#ifdef BOOST_BUILD
+#include <boost/fusion/adapted/std_tuple.hpp>
+#include <boost/fusion/include/std_tuple.hpp>
+#include <boost/iterator/zip_iterator.hpp>
+namespace skl::iterator{
+  template<typename tuple>
+  using zip_iterator = boost::zip_iterator<tuple>;
+} // skl::itertor
+#else
 
 namespace skl::iterator
 {
@@ -15,15 +24,6 @@ namespace skl::iterator
       zip_iterator(CollectionTuple tuple)
         : tuple_(tuple)
       {}
-
-      /*
-      template<typename CollectionTupleOther>
-        bool tuple_any_equal(CollectionTupleOther& other) const
-        {
-          auto tt = util::tuple::zip(tuple_, other.tuple_);
-          return std::apply([&](auto const&... x) { return (... || (std::get<0>(x) == std::get<1>(x))); }, tt);
-        }
-      */
 
       auto operator*()
       {
@@ -74,3 +74,49 @@ namespace skl::iterator
       CollectionTuple tuple_;
   };
 } // skl::iterator
+#endif
+
+
+
+
+namespace skl::aggregate
+{
+  template<typename... Collection>
+  struct zip
+  {
+    public: 
+
+      //using iterator = zip_iterator<std::tuple<typename std::decay_t<Collection>::iterator...>>;
+
+      zip(Collection&&... collection)
+        : collection_(std::forward<Collection>(collection)...)
+      {}
+
+      auto begin()
+      { 
+        auto tuple_begin = util::tuple::make_for_each([](auto&& iterator) { return iterator.begin(); }, collection_);
+        return iterator::zip_iterator<decltype(tuple_begin)>(tuple_begin);
+      }
+
+      auto end()
+      {
+        auto tuple_end = util::tuple::make_for_each([](auto&& iterator) { return iterator.end(); }, collection_);
+        return iterator::zip_iterator<decltype(tuple_end)>(tuple_end);
+      }
+
+    private:
+
+      std::tuple<Collection&&...> collection_;
+
+  };
+} // skl::aggregate
+
+namespace skl
+{
+  // as a function for automatic type deduction
+  template<typename... Collection>
+  auto zip(Collection&&... collection)
+  {
+    return aggregate::zip<Collection...>(std::forward<Collection>(collection)...);
+  }
+} // skl

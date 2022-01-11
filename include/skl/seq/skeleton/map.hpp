@@ -1,31 +1,64 @@
 #pragma once
 
-namespace skl::skeleton::detail
+#include <iterator>
+#include <tuple>
+#include <type_traits>
+#include <concepts>
+
+namespace skl
 {
-  template<typename Fn>
-  struct map_impl
+  namespace skeleton
   {
-    Fn& fn_;
-
-    explicit map_impl(Fn& fn): fn_(fn) {}
-
-    template<typename Iterator>
-    void pre_for(Iterator&& ite)
+    template<typename Function>
+    struct map_wrapper
     {
-      return std::apply(fn_, ite);
-    }
+      map_wrapper(Function function)
+        : function_(function)
+      {
+      }
 
-    template<typename Iterator>
-    void inside_for(Iterator&& ite)
+      template<typename Iterator>
+      constexpr int init(Iterator&& i)
+      {
+        function_(*i);
+        return 0;
+      }
+
+      template<typename Iterator>
+      constexpr int kernel(Iterator&& i)
+      {
+        function_(*i);
+        return 0;
+      }
+
+      constexpr void finish()
+      {
+        return;
+      }
+
+      Function function_;
+    };
+
+    /*
+    template<typename T>
+    struct is_map : std::false_type
     {
-      return std::apply(fn_, ite);
-    }
+    };
 
-    void post_for()
+    template<typename Function>
+    struct is_map<map_wrapper<Function>> : std::true_type
     {
-      return;
-    }
-  };
-} // skl::skeleton::detail
+    };
 
+    template<typename T>
+    concept mapable = is_map<T>::value;
+    */
+  }// namespace skeleton
 
+  template<typename Function>
+  skeleton::map_wrapper<Function> map(Function&& function)
+  {
+    return skeleton::map_wrapper<Function>(function);
+  }
+
+}// namespace skl
