@@ -1,27 +1,11 @@
-#include <functional>
-#include <iostream>
-#include <vector>
+#include "util.hpp"
 
-#include <fmt/core.h>
-#include <fmt/ranges.h>
-
-#include <skl/skl.hpp>
-
-
-int main(int, const char**)
+namespace
 {
-  std::vector<int> vec(10);
-
-  fmt::print("vector {}\n", vec);
-
-  auto inc = [](int& x)
-  { ++x; };
-
-  vec >>= skl::map(inc);
-
-  fmt::print("vector {}\n", vec);
-  for (int& i : vec)
-    if (i != 1) return 1;
-
-  return 0;
-}
+  TEST(Map, AllValuesIncremented)
+  {
+    std::vector<int> vec(1000);
+    vec >>= skl::map(inc());
+    for (int& i : vec) EXPECT_EQ(i, 1);
+  }
+}// namespace

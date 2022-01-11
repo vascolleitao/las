@@ -2,7 +2,7 @@
 
 #include "fmt/core.h"
 #include <skl/util/utility.hpp>
-#include <skl/config.h>
+#include <skl/config.hpp>
 #include <type_traits>
 #include <concepts>
 
@@ -39,40 +39,41 @@ namespace skl
 
   template<typename Skeleton_Head, typename Skeleton_Tail>
   struct Skeleton
-    : Skeleton_Head
-    , Skeleton_Tail
   {
-    Skeleton(Skeleton_Head h, Skeleton_Tail t)
-      : Skeleton_Head(h)
-      , Skeleton_Tail(t)
+    Skeleton(Skeleton_Head skeleton_head, Skeleton_Tail skeleton_tail)
+      : head(skeleton_head)
+      , tail(skeleton_tail)
     {
     }
 
     template<typename Iterator>
     constexpr int init(Iterator i)
     {
-      if (!Skeleton_Head::init(i)) { return Skeleton_Tail::init(i); }
+      if (!head.init(i)) { return tail.init(i); }
       return 1;
     }
 
     template<typename Iterator>
     constexpr int kernel(Iterator i)
     {
-      if (!Skeleton_Head::kernel(i)) { return Skeleton_Tail::kernel(i); }
+      if (!head.kernel(i)) { return tail.kernel(i); }
       return 1;
     }
 
     constexpr auto finish()
     {
-      using return_skeleton_head = decltype(Skeleton_Head::finish());
-      using return_skeleton_tail = decltype(Skeleton_Tail::finish());
-      if constexpr (!std::is_void_v<return_skeleton_head> && !std::is_void_v<return_skeleton_tail>)
-        return std::tuple_cat(Skeleton_Head::finish(), Skeleton_Tail::finish());
-      else if constexpr (!std::is_void_v<return_skeleton_head>)// verificar que e exclusivo
-        return Skeleton_Head::finish();
-      else if constexpr (!std::is_void_v<return_skeleton_tail>)
-        return Skeleton_Tail::finish();
+      using return_head = decltype(head.finish());
+      using return_tail = decltype(tail.finish());
+      if constexpr (!std::is_void_v<return_head> && !std::is_void_v<return_tail>)
+        return std::tuple_cat(head.finish(), tail.finish());
+      else if constexpr (!std::is_void_v<return_head>)// verificar que e exclusivo
+        return head.finish();
+      else if constexpr (!std::is_void_v<return_tail>)
+        return tail.finish();
     }
+
+    Skeleton_Head head;
+    Skeleton_Tail tail;
   };
 
   template<class T>

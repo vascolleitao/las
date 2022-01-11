@@ -5,15 +5,25 @@ FetchContent_Declare(
  fmt
  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
  GIT_TAG 8.0.1)
-FetchContent_MakeAvailable(fmt)
 
-# set(TEST_LIST "zip;adapter;map;fusion;reduce")
-set(TEST_LIST "map;reduce;fusion;filter")
+message(STATUS "Using googletest via FetchContent.")
+FetchContent_Declare(
+ googletest
+ GIT_REPOSITORY https://github.com/google/googletest.git
+ GIT_TAG release-1.11.0)
 
-foreach(TEST ${TEST_LIST})
- # Sequential tests
- add_executable(${TEST} ${TEST}.cpp)
- target_link_libraries(${TEST} PRIVATE skl fmt::fmt)
- add_test(SEQ_${TEST} ${TEST})
- # OMP tests add_executable(omp_${TEST} ${TEST}.cpp) target_link_libraries(omp_${TEST} PRIVATE skl skl_omp_layer fmt::fmt) add_test(OMP_${TEST} omp_${TEST})
-endforeach()
+FetchContent_MakeAvailable(fmt googletest)
+
+set(TEST_LIST "map.cpp;reduce.cpp;fusion.cpp;filter.cpp")
+
+# Sequential tests
+add_executable(seq_tests ${TEST_LIST})
+target_link_libraries(seq_tests PRIVATE skl gtest_main fmt::fmt)
+add_test(seq_tests seq_tests)
+
+# OMP tests
+if(ENABLE_SHARED_MEMORY_LAYER)
+ add_executable(omp_tests ${TEST_LIST})
+ target_link_libraries(omp_tests PRIVATE skl skl_omp_layer gtest_main fmt::fmt)
+ add_test(omp_tests omp_tests)
+endif()

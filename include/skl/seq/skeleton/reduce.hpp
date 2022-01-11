@@ -10,10 +10,6 @@ namespace skl
     template<typename Function>
     struct reduce_wrapper
     {
-      using reduction_t = typename std::decay_t<Function>::result_type;
-      Function function_;
-      reduction_t reduction_;
-      bool first_;
 
       reduce_wrapper(Function function)
         : function_(function)
@@ -21,16 +17,16 @@ namespace skl
       }
 
       template<typename Iterator>
-      constexpr int init(Iterator&& ite)
+      constexpr int init(Iterator&& i)
       {
-        reduction_ = *ite;
+        reduction_ = *i;
         return 0;
       }
 
       template<typename Iterator>
-      constexpr int kernel(Iterator&& ite)
+      constexpr int kernel(Iterator&& i)
       {
-        reduction_ = function_(reduction_, *ite);
+        reduction_ = function_(reduction_, *i);
         return 0;
       }
 
@@ -38,8 +34,13 @@ namespace skl
       {
         return std::make_tuple(reduction_);
       }
+
+      using reduction_t = typename std::decay_t<Function>::result_type;
+      Function function_;
+      reduction_t reduction_;
     };
 
+    /*
     template<typename T>
     struct is_reduce : std::false_type
     {
@@ -53,6 +54,7 @@ namespace skl
     template<typename T>
     concept reducible = is_reduce<T>::value;
     // concept reducible = is_reduce<std::decay_t<T>>::value;
+    */
   }// namespace skeleton
 
 
@@ -61,4 +63,5 @@ namespace skl
   {
     return skeleton::reduce_wrapper<Function>(function);
   }
+
 }// namespace skl

@@ -8,16 +8,20 @@ namespace skl
     template<typename Predicate>
     struct filter_wrapper
     {
-      template<typename Iterator>
-      constexpr int init(Iterator&& ite)
+      filter_wrapper(Predicate predicate)
+        : predicate_(predicate)
       {
-        return predicate_(*ite);
+      }
+      template<typename Iterator>
+      constexpr int init(Iterator&& i)
+      {
+        return predicate_(*i);
       }
 
       template<typename Iterator>
-      constexpr int kernel(Iterator&& ite)
+      constexpr int kernel(Iterator&& i)
       {
-        return predicate_(*ite);
+        return predicate_(*i);
       }
 
       constexpr void finish()
@@ -32,6 +36,6 @@ namespace skl
   template<typename Function>
   skeleton::filter_wrapper<Function> filter(Function&& function)
   {
-    return skeleton::filter_wrapper<Function>{ function };
+    return skeleton::filter_wrapper<Function>(function);
   }
 }// namespace skl
