@@ -7,9 +7,8 @@
 
 /* Data */
 
-//#include "skl/seq/data/aggregate/index.hpp"
-//#include "skl/seq/data/aggregate/simple.hpp"
-//#include "skl/seq/data/aggregate/zip.hpp"
+#include "skl/aggregate/zip.hpp"
+#include "skl/aggregate/index.hpp"
 //#include "skl/seq/data/aggregate/dummy.hpp"
 
 namespace skl::seq

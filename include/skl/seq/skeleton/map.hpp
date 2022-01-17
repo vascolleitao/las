@@ -1,9 +1,14 @@
 #pragma once
 
+#include "skl/aggregate/index.hpp"
 #include <iterator>
 #include <tuple>
 #include <type_traits>
 #include <concepts>
+
+#include <boost/fusion/adapted/std_tuple.hpp>
+#include <boost/fusion/include/std_tuple.hpp>
+#include <boost/iterator/zip_iterator.hpp>
 
 namespace skl
 {
@@ -28,6 +33,38 @@ namespace skl
       constexpr int kernel(Iterator&& i)
       {
         function_(*i);
+        return 0;
+      }
+
+      /*
+       * this should be by inheritance
+       *
+       */
+      template<class... Iterators>
+      constexpr int init(boost::iterators::zip_iterator<std::tuple<Iterators...>> i)
+      {
+        std::apply(function_, *i);
+        return 0;
+      }
+
+      template<class... Iterators>
+      constexpr int kernel(boost::iterators::zip_iterator<std::tuple<Iterators...>> i)
+      {
+        std::apply(function_, *i);
+        return 0;
+      }
+
+      template<class... Iterators>
+      constexpr int init(skl::iterator::index<Iterators...> i)
+      {
+        std::apply(function_, *i);
+        return 0;
+      }
+
+      template<class... Iterators>
+      constexpr int kernel(skl::iterator::index<Iterators...> i)
+      {
+        std::apply(function_, *i);
         return 0;
       }
 

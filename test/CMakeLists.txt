@@ -14,7 +14,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(fmt googletest)
 
-set(TEST_LIST "map.cpp;reduce.cpp;fusion.cpp;filter.cpp")
+set(TEST_LIST map.cpp reduce.cpp fusion.cpp filter.cpp zip.cpp index.cpp)
 
 # Sequential tests
 add_executable(seq_tests ${TEST_LIST})

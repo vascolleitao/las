@@ -90,11 +90,14 @@ auto operator>>=(Skeleton_lhs&& lhs, Skeleton_rhs&& rhs)
   return skl::Skeleton<skl::paralelization<Skeleton_lhs>, skl::paralelization<Skeleton_rhs>>(skl::paralelization<Skeleton_lhs>{ lhs }, skl::paralelization<Skeleton_rhs>{ rhs });
 }
 
+/*
+ * right associative
+ * left bettr for passing properties like extending map
+ */
 template<skl::Collection_t Collection, typename Skeleton>
 auto operator>>=(Collection&& collection, Skeleton&& skeleton)
 {
-  using iterator = typename std::decay_t<Collection>::iterator;
-  iterator ite = collection.begin();
-  iterator end = collection.end();
+  auto ite = collection.begin();
+  auto end = collection.end();
   return skl::paralelization<skl::executor>().execute(ite, end, skeleton);
 }

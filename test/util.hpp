@@ -59,4 +59,13 @@ namespace
   };
   */
 
+  struct init1
+  {
+    void operator()(auto& x, auto& y)
+    {
+      x = 1;
+      y = 1;
+    }
+  };
+
 }// namespace

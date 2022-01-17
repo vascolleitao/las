@@ -1,33 +1,23 @@
-#include <functional>
-#include <iostream>
-#include <vector>
-
-#include <skl/skl.hpp>
+#include "util.hpp"
 
 
-
-
-int main(int /*argc*/, const char ** /*argv*/)
+namespace
 {
-  const size_t small_vector_size(10);
-  std::vector<int> small_vector(small_vector_size);
-  const size_t big_vector_size(100);
-  std::vector<int> big_vector(big_vector_size);
-
-
-
-
-  skl::composition( skl::zip(big_vector, small_vector) 
-      , skl::map([](auto& x, auto& y){ x=1; y=1; })
-  );
-
-
-
-
-  for(auto xi=small_vector.begin(), yi=big_vector.begin(); xi != small_vector.end(); ++xi, ++yi )
+  TEST(Zip, InitalizeVectorOnes)
   {
-    if(*xi != 1 || *yi != 1) return 1;
-  }
+    const size_t size(1000);
+    std::vector<int> xv(size);
+    std::vector<int> yv(size);
 
-  return 0;
-}
+
+    skl::zip(xv, yv)
+      >>= skl::map(init1());
+
+
+    for (auto xi = xv.begin(), yi = yv.begin(); xi != xv.end(); ++xi, ++yi)
+    {
+      EXPECT_EQ(*xi, 1);
+      EXPECT_EQ(*yi, 1);
+    }
+  }
+}// namespace
