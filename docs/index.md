@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/vascolleitao/skl/tree/develop">
-    <img src="doc/images/plum.png" alt="Logo" width="80" height="80">
+    <img src="images/plum.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">SKL</h3>
