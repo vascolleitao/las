@@ -30,13 +30,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/vascolleitao/skl/tree/develop">
-    <img src="docs/images/plum.png" alt="Logo" width="80" height="80">
+    <img src="images/plum.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">SKL</h3>
 
   <p align="center">
-    SKL is an Algoritmic Skeleton Library with multiple layers of parallelization 
+    SKL is an Algoritmic Skeleton Framework with multiple layers of parallelization 
     <br />
     <a href="https://github.com/vascolleitao/skl"><strong>Explore the docs »</strong></a>
     <br />
@@ -142,7 +142,7 @@ Depending on the paralelization layer you may also need:
 
 ### An example of using the map skeleton
 
-Here is a simple example of incrementing all elements of a collection:
+Here is a simple example of incrementing all the elements of a collection:
 
 ```cpp
 std::vector<int> vec(1000);
@@ -151,7 +151,7 @@ vec >>= skl::map(inc());
 
 ### An example of using the reduce skeleton
 
-This example shows how to sum all elemnts of one collection.
+This example show how to summ all the elemnts of one collection.
 
 ```cpp
 std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
@@ -279,6 +279,5 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 [license-url]: https://github.com/vascolleitao/skl/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vascolleitao
-
 
 
