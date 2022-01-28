@@ -142,7 +142,7 @@ Depending on the paralelization layer you may also need:
 
 ### An example of using the map skeleton
 
-Here is a simple example of incrementing all the elements of a collection:
+Here is a simple example of incrementing all elements of a collection:
 
 ```cpp
 std::vector<int> vec(1000);
@@ -151,7 +151,7 @@ vec >>= skl::map(inc());
 
 ### An example of using the reduce skeleton
 
-This example show how to summ all the elemnts of one collection.
+This example shows how to sum all elemnts of one collection.
 
 ```cpp
 std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
@@ -189,7 +189,7 @@ vec
   >>= skl::map(clear());
 ```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://vascolleitao.github.io/skl)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
