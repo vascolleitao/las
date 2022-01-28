@@ -36,7 +36,7 @@
 <h3 align="center">SKL</h3>
 
   <p align="center">
-    SKL is an Algoritmic Skeleton Framework with multiple layers of parallelization 
+    SKL is an Algoritmic Skeleton Library with multiple layers of parallelization 
     <br />
     <a href="https://github.com/vascolleitao/skl"><strong>Explore the docs »</strong></a>
     <br />
