@@ -1,0 +1,8 @@
+#pragma once
+
+namespace skl::version
+{
+  constexpr int MAJOR = @SKL_VERSION_MAJOR@;
+  constexpr int MINOR = @SKL_VERSION_MINOR@;
+  constexpr int PATCH = @SKL_VERSION_PATCH@;
+}// namespace skl::version

@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Project ####################################################################
 
 project(SKL VERSION 0.1.0)
-configure_file(include/skl/config.hpp.in "${CMAKE_CURRENT_SOURCE_DIR}/include/skl/config.hpp")
+configure_file(include/skl/version/config.hpp.in "${CMAKE_CURRENT_SOURCE_DIR}/include/skl/version/config.hpp")
 
 include(cmake/ProjectSettings.cmake)
 include(cmake/CompilerWarnings.cmake)

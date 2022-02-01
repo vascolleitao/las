@@ -17,7 +17,7 @@ FetchContent_MakeAvailable(fmt googletest)
 set(TEST_LIST "map.cpp;reduce.cpp;fusion.cpp;filter.cpp")
 
 # Sequential tests
-add_executable(seq_tests ${TEST_LIST})
+add_executable(seq_tests main.cpp ${TEST_LIST})
 target_link_libraries(seq_tests PRIVATE skl gtest_main fmt::fmt)
 add_test(seq_tests seq_tests)
 
