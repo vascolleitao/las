@@ -1,13 +1,15 @@
 #pragma once
 
-namespace skl::scheduler
+#include <tuple>
+
+namespace skl::omp::scheduler
 {
   struct constant
   {
-    const size_t id_;
-    const size_t n_threads_;
+    const int id_;
+    const int n_threads_;
 
-    constant(size_t id, size_t n_threads)
+    constant(int id, int n_threads)
       : id_(id)
       , n_threads_(n_threads)
     {
@@ -24,4 +26,4 @@ namespace skl::scheduler
       return { b, (e < end ? e : end) };
     }
   };
-}// namespace skl::scheduler
+}// namespace skl::omp::scheduler

@@ -1,99 +1,32 @@
 #pragma once
 
-#include "fmt/core.h"
-#include <skl/util/utility.hpp>
-#include <skl/config.h>
-#include <type_traits>
-#include <concepts>
+#include "skl/util/utility.hpp"
+#include "skl/version/config.hpp"
 
-namespace skl
-{
-  struct executor
-  {
-  };
+#include "skl/base/layer.hpp"
+#include "skl/cpu/layer.hpp"
 
-  template<typename T>
-  concept executable = requires(T t)
-  {
-    std::is_base_of_v<executor, T>;
-  };
-}// namespace skl
-
-#include <skl/seq/layer.hpp>
 #ifdef SKL_OMP
-#include <skl/omp/layer.hpp>
+#include "skl/omp/layer.hpp"
+using paralelization_factory = skl::omp::proxy_factory<skl::cpu::proxy_factory<skl::base::proxy_factory>>;
+#else
+using paralelization_factory = skl::cpu::proxy_factory<skl::base::proxy_factory>;
 #endif
 
-namespace skl
+
+template<typename Decorator, typename Skeleton>
+auto operator>>=(Decorator&& decorator, Skeleton&& skeleton)
 {
-  template<typename T>
-  using paralelization =
-#ifdef SKL_OMP
-    skl::omp::layer<
-#endif
-      skl::seq::layer<T>
-#ifdef SKL_OMP
-      >
-#endif
-    ;
-
-  template<typename Skeleton_Head, typename Skeleton_Tail>
-  struct Skeleton
-    : Skeleton_Head
-    , Skeleton_Tail
-  {
-    Skeleton(Skeleton_Head h, Skeleton_Tail t)
-      : Skeleton_Head(h)
-      , Skeleton_Tail(t)
-    {
-    }
-
-    template<typename Iterator>
-    constexpr int init(Iterator i)
-    {
-      if (!Skeleton_Head::init(i)) { return Skeleton_Tail::init(i); }
-      return 1;
-    }
-
-    template<typename Iterator>
-    constexpr int kernel(Iterator i)
-    {
-      if (!Skeleton_Head::kernel(i)) { return Skeleton_Tail::kernel(i); }
-      return 1;
-    }
-
-    constexpr auto finish()
-    {
-      using return_skeleton_head = decltype(Skeleton_Head::finish());
-      using return_skeleton_tail = decltype(Skeleton_Tail::finish());
-      if constexpr (!std::is_void_v<return_skeleton_head> && !std::is_void_v<return_skeleton_tail>)
-        return std::tuple_cat(Skeleton_Head::finish(), Skeleton_Tail::finish());
-      else if constexpr (!std::is_void_v<return_skeleton_head>)// verificar que e exclusivo
-        return Skeleton_Head::finish();
-      else if constexpr (!std::is_void_v<return_skeleton_tail>)
-        return Skeleton_Tail::finish();
-    }
-  };
-
-  template<class T>
-  concept Collection_t = requires(T t)
-  {
-    t.begin();
-    t.end();
-  };
-}// namespace skl
-
-template<typename Skeleton_lhs, typename Skeleton_rhs>
-auto operator>>=(Skeleton_lhs&& lhs, Skeleton_rhs&& rhs)
-{
-  return skl::Skeleton<skl::paralelization<Skeleton_lhs>, skl::paralelization<Skeleton_rhs>>(skl::paralelization<Skeleton_lhs>{ lhs }, skl::paralelization<Skeleton_rhs>{ rhs });
+  auto d = paralelization_factory::refine_skeleton(decorator);
+  auto s = paralelization_factory::refine_skeleton(skeleton);
+  return skl::skeleton::decorator_generate(d, s);
 }
 
-template<skl::Collection_t Collection, typename Skeleton>
+template<skl::Aggregate_c Collection, typename Skeleton>
 auto operator>>=(Collection&& collection, Skeleton&& skeleton)
 {
-  using iterator = typename std::decay_t<Collection>::iterator;
-  iterator ite = collection.begin();
-  iterator end = collection.end();
-  return skl::paralelization<skl::executor>().execute(ite, end, skeleton);
+  auto s = paralelization_factory::refine_skeleton(skeleton);
+  auto simple_template_method = skl::skeleton::template_method_generate(s);
+  auto template_method = paralelization_factory::refine_template_method(simple_template_method);
+  return template_method.execute(collection.begin(), collection.end());
 }

@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "skl/util/tuple.hpp"
 #include <tuple>
+#include "skl/util/tuple.hpp"
 
 
 namespace skl
@@ -12,13 +12,11 @@ namespace skl
     template<typename Index_t, typename CollectionTuple>
     struct index
     {
-      Index_t index_;
-      CollectionTuple tuple_;
-
-      index(Index_t index, CollectionTuple tuple)
-        : index_(index)
+      index(Index_t idx, CollectionTuple tuple)
+        : index_(idx)
         , tuple_(tuple)
-      {}
+      {
+      }
 
       void operator++()
       {
@@ -35,9 +33,12 @@ namespace skl
       {
         return std::tuple_cat(std::tie(index_), tuple_);
       }
+
+      Index_t index_;
+      CollectionTuple tuple_;
     };
-  } // namespace iterator
-} // namespace skl
+  }// namespace iterator
+}// namespace skl
 
 namespace skl
 {
@@ -54,7 +55,8 @@ namespace skl
 
       explicit index(Collection&&... collection)
         : collection_(std::forward<Collection>(collection)...)
-      {}
+      {
+      }
 
       iterator begin()
       {
@@ -63,11 +65,13 @@ namespace skl
 
       iterator end()
       {
-        auto sizes = util::tuple::make_for_each([](auto&& collection) { return collection.size(); }, collection_);
+        auto sizes = util::tuple::make_for_each([](auto&& collection)
+          { return collection.size(); },
+          collection_);
         return iterator(util::tuple::min(sizes), collection_);
       }
     };
-  } // aggregate
+  }// namespace aggregate
 
   // as a function for automatic type deduction
   template<typename... Collection>
@@ -75,5 +79,4 @@ namespace skl
   {
     return aggregate::index<Collection...>(std::forward<Collection>(collection)...);
   }
-} // skl
-
+}// namespace skl

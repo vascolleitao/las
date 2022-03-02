@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Project ####################################################################
 
 project(SKL VERSION 0.1.0)
-configure_file(include/skl/config.h.in "${CMAKE_CURRENT_SOURCE_DIR}/include/skl/config.h")
+configure_file(include/skl/version/config.hpp.in "${CMAKE_CURRENT_SOURCE_DIR}/include/skl/version/config.hpp")
 
 include(cmake/ProjectSettings.cmake)
 include(cmake/CompilerWarnings.cmake)
@@ -37,13 +37,12 @@ target_link_libraries(skl INTERFACE skl_options skl_warnings)
 target_include_directories(skl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 # $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include> $<INSTALL_INTERFACE:include>
 
-find_package(OpenMP REQUIRED)
-add_library(skl_omp_layer INTERFACE)
-target_link_libraries(skl_omp_layer INTERFACE OpenMP::OpenMP_CXX)
-target_compile_definitions(skl_omp_layer INTERFACE SKL_OMP)
-
-if(ENABLE_SHARED_MEMORY_LAYER)
- target_link_libraries(skl INTERFACE skl_omp_layer)
+option(ENABLE_SKL_OMP_LAYER "Enable skl omp layer" ON)
+if(ENABLE_SKL_OMP_LAYER)
+ find_package(OpenMP REQUIRED)
+ add_library(skl_omp_layer INTERFACE)
+ target_link_libraries(skl_omp_layer INTERFACE OpenMP::OpenMP_CXX)
+ target_compile_definitions(skl_omp_layer INTERFACE SKL_OMP)
 endif()
 
 enable_testing()

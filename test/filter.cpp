@@ -1,27 +1,15 @@
-#include <functional>
-#include <iostream>
-#include <vector>
+#include "util.hpp"
+#include <gtest/gtest.h>
 
-#include <skl/skl.hpp>
-
-
-
-
-int main(int /*argc*/, const char ** /*argv*/)
+namespace
 {
-  const size_t size(1000);
-  std::vector<int> vec(size);
+  TEST(Filter, ClearEvenNumbersFromCollection)
+  {
+    std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    vec
+      >>= skl::filter(even())
+      >>= skl::map(clear());
 
-  auto inc = [](int i, std::vector<int>& v){ ++v[i]; };
-  auto even = [](int i, std::vector<int>& v){ return i%2; };
-
-  /*
-  skl::composition(skl::zip(skl::index(vec))
-      , skl::map(inc)
-      , filter(even)
-      , skl::reduce()
-  );
-  */
-
-  return 1;
-}
+    for (auto& i : vec) ASSERT_EQ(i % 2, 0);
+  }
+}// namespace

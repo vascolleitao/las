@@ -82,7 +82,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project was 
+SKL aims to be an easy to use library. SKL achieves this by encapsulating all of the parallel code inside the skeletons, so that the user wont need to know/code anything related to parallelization. The user only needs to know the semantics of the skletons.
+
+SKL is capable of achieving good performing, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. 
+
+SKL has the ability to activate and deactivate specific layers at compile adapting the implementation of the skeletons to diferent kinds of hardware arquitectures. SKL can activate multiple layers at the same time wich makes hybrid layers of parallelizaion possibly like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algoritmic library.  
+
+
+SKL started as a master dissertation project with the aim of giving HPC/parallel solutions a better architecture. SKL is, as refered, an algoritmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project. SKL is still being develop. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -91,20 +98,16 @@ This project was
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is an example of how you may set up SKL project locally.
+By cloning a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-The prerequisite to install library are
-* Compiler
-    A CXX compiler with standard C++20
-* OpenMP
-    Can be installed via brew
-    ```sh
-    brew install libomp
-    ```
+The prerequisite to install library the full libarary are: 
+* C++ compiler with standard C++20
+
+Depending on the paralelization layer you may also need:
+* OpenMP 
 
 ### Installation
 
@@ -113,16 +116,16 @@ The prerequisite to install library are
     git clone https://github.com/vascolleitao/skl.git
     ```
 2. Building
-    ```
+    ```sh
     cmake -B build -S skl
     cmake --build build
     ```
 3. Testing
-    ```
+    ```sh
     ctest --ctest-dir build
     ```
 4. Installing
-    ```
+    ```sh
     cmake --install build \
           --prefix <INSTALL-DIR> \
           --component skl
@@ -137,7 +140,54 @@ The prerequisite to install library are
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### An example of using the map skeleton
+
+Here is a simple example of incrementing all the elements of a collection:
+
+```cpp
+std::vector<int> vec(1000);
+vec >>= skl::map(inc());
+```
+
+### An example of using the reduce skeleton
+
+This example show how to summ all the elemnts of one collection.
+
+```cpp
+std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+auto [sum] = vec >>= skl::reduce(std::plus<int>());
+```
+
+### Example: Fusion multiple skeletons together
+
+This example shows the fusion of two reduces. This operation returns a tuple, the first element corresponds to the result of the first reduce and the second element two the second reduce fused.
+
+```cpp
+std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+auto [min, max] = vec
+  >>= skl::reduce(skl::min<int>())
+  >>= skl::reduce(skl::max<int>());
+```
+
+Note that in this example the first reduce is applyed to the original collection and the second reduce is applyed after computing the "complex_computation" on all elements of the collection. But both reduces are computed with only one loop, like lazy evaluation.
+
+```cpp
+std::vector<int> vec(100);
+auto [sum_before_map, sum_after_map] = vec
+  >>= skl::reduce(std::plus<int>())
+  >>= skl::map(complex_computation())
+  >>= skl::reduce(std::plus<int>());
+```
+
+### Example: Skeleton filter
+
+In this example a filter is used to erase the even numbers of a collection by applyn the skeleton map with the functor clear to the filtered ones. 
+```cpp
+std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+vec
+  >>= skl::filter(even())
+  >>= skl::map(clear());
+```
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -160,14 +210,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [ ] Reverse
 - Parallelization
     - [X] Shared memory layer
-        - [X] OMP support
-        - [X] C++11 threads support
-        - [ ] TBB support
+        - [X] OMP 
+        - [X] C++11 threads 
+        - [ ] TBB 
     - [ ] Distributed memory layer
-        - [ ] MPI support
+        - [ ] MPI 
     - [ ] GPU layer
-        - [ ] CUDA support
-        - [ ] OpenCL suport
+        - [ ] CUDA 
+        - [ ] OpenCL 
 
 See the [open issues](https://github.com/vascolleitao/skl/issues) for a full list of proposed features (and known issues).
 
@@ -213,15 +263,6 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 
 
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -238,6 +279,6 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 [license-url]: https://github.com/vascolleitao/skl/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vascolleitao
-```
+
 
 

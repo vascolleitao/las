@@ -1,24 +1,26 @@
-#include <functional>
-#include <iostream>
-#include <vector>
+#include "util.hpp"
 
-#include <fmt/core.h>
-#include <fmt/ranges.h>
-
-#include <skl/skl.hpp>
-
-
-int main(int /*argc*/, const char** /*argv*/)
+namespace
 {
-  std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-  fmt::print("vector {}\n", vec);
+  TEST(Reduce, SumVectorOfOnes)
+  {
+    std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    int real_sum = 0;
+    for (auto& i : vec) real_sum += i;
 
-  auto [sum] = vec >>= skl::reduce(std::plus<int>());
-  fmt::print("vector {}\n", vec);
+    auto [sum] = vec >>= skl::reduce(std::plus<int>());
 
-  fmt::print("sum = {}\n", sum);
+    ASSERT_EQ(real_sum, sum);
+  }
 
-  int real_sum = 0;
-  for (auto i = vec.begin(); i != vec.end(); ++i) real_sum += *i;
-  return sum != real_sum;
-}
+  TEST(Reduce, EmptyVector)
+  {
+    std::vector<int> vec{};
+    int real_sum = 0;
+    for (auto& i : vec) real_sum += i;
+
+    auto [sum] = vec >>= skl::reduce(std::plus<int>());
+
+    ASSERT_EQ(real_sum, sum);
+  }
+}// namespace
