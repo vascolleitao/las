@@ -4,11 +4,11 @@
 #include <tuple>
 
 #include "skl/base/skeleton/reduce.hpp"
-#include "skl/cpu/skeleton/proxy.hpp"
+#include "skl/cpu/structure/proxy.hpp"
 
-namespace skl::cpu::skeleton
+namespace skl::_cpu
 {
-  template<skl::base::skeleton::reduce_c Super>
+  template<reduce_c Super>
   struct proxy<Super> : Super
   {
     proxy(Super super)
@@ -35,4 +35,4 @@ namespace skl::cpu::skeleton
       return std::make_tuple(Super::reduction_);
     }
   };
-}// namespace skl::cpu::skeleton
+}// namespace skl::_cpu

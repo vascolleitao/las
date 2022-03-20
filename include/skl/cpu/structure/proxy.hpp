@@ -1,14 +1,13 @@
 #pragma once
 
-
-namespace skl::cpu::skeleton
+namespace skl::_cpu
 {
   template<typename Super>
   struct proxy : Super
   {
     proxy(Super super)
       : Super(super)
-    {
-    }
+    {}
   };
-}// namespace skl::cpu::skeleton
+
+}// namespace skl::_cpu

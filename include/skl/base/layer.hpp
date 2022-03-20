@@ -14,23 +14,23 @@
 #include "skl/base/skeleton/filter.hpp"
 
 /* Structure generation */
-#include "skl/base/skeleton/decorator.hpp"
-#include "skl/base/skeleton/template_method.hpp"
+#include "skl/base/structure/decorator.hpp"
+#include "skl/base/structure/template_method.hpp"
 
-namespace skl::base
+namespace skl
 {
-  struct proxy_factory
+  struct base
   {
-    template<typename Skeleton>
-    static auto refine_skeleton(Skeleton skeleton)
+    template<typename skeleton_t>
+    auto add_proxy(skeleton_t skeleton)
     {
       return skeleton;
     }
 
-    template<typename Executor>
-    static auto refine_template_method(Executor executor)
+    template<_::template_method_c template_method_t>
+    auto refine(template_method_t template_method)
     {
-      return executor;
+      return template_method;
     }
   };
 }// namespace skl

@@ -1,12 +1,11 @@
 #pragma once
 
-
 #include "skl/base/skeleton/filter.hpp"
-#include "skl/cpu/skeleton/proxy.hpp"
+#include "skl/cpu/structure/proxy.hpp"
 
-namespace skl::cpu::skeleton
+namespace skl::_cpu
 {
-  template<skl::base::skeleton::filter_c Super>
+  template<filter_c Super>
   struct proxy<Super> : Super
   {
     proxy(Super super)
@@ -31,4 +30,4 @@ namespace skl::cpu::skeleton
     }
   };
 
-}// namespace skl::cpu::skeleton
+}// namespace skl::_cpu

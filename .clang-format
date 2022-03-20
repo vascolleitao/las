@@ -34,7 +34,7 @@ BraceWrapping:
   SplitEmptyRecord: false
 BreakAfterJavaFieldAnnotations: true
 BreakBeforeBinaryOperators: All
-BreakBeforeBraces: Allman
+BreakBeforeBraces: Custom
 BreakBeforeTernaryOperators: true
 BreakInheritanceList: BeforeComma
 BreakConstructorInitializers: BeforeComma
