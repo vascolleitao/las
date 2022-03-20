@@ -1,11 +1,11 @@
 #pragma once
 
 #include "skl/base/skeleton/map.hpp"
-#include "skl/cpu/skeleton/proxy.hpp"
+#include "skl/cpu/structure/proxy.hpp"
 
-namespace skl::cpu::skeleton
+namespace skl::_cpu
 {
-  template<skl::base::skeleton::map_c Super>
+  template<map_c Super>
   struct proxy<Super> : Super
   {
     proxy(Super super)
@@ -32,4 +32,4 @@ namespace skl::cpu::skeleton
       return;
     }
   };
-}// namespace skl::cpu::skeleton
+}// namespace skl::_cpu

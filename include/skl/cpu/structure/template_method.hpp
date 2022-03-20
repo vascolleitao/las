@@ -1,11 +1,13 @@
 #pragma once
 
-namespace skl::cpu
+#include "skl/base/structure/template_method.hpp"
+
+namespace skl::_cpu
 {
-  template<typename Super>
-  struct template_method_proxy : public Super
+  template<_::template_method_c Super>
+  struct template_method : public Super
   {
-    template_method_proxy(Super super)
+    template_method(Super super)
       : Super(super)
     {
     }
@@ -25,10 +27,4 @@ namespace skl::cpu
     }
   };
 
-  template<typename Super>
-  auto template_method_proxy_generate(Super super)
-  {
-    return template_method_proxy<Super>(super);
-  }
-
-}// namespace skl::cpu
+}// namespace skl::_cpu
