@@ -31,7 +31,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/vascolleitao/skl/tree/develop">
+  <a href="https://github.com/vascolleitao/skl">
     <img src="images/plum.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -71,7 +71,7 @@
 ## Documentation
 
 See the master's thesis document
- <a href="vascolleitao.github.io/skl/docs/pdfs/skl_master_dissertation.pdf" target="_blank">here</a>.</a>
+ <a href="vascolleitao.github.io/pdfs/skl_master_thesis.pdf" target="_blank">here</a>.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
