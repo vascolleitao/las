@@ -82,19 +82,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-SKL aims to be an easy to use library. SKL achieves this by encapsulating all of the parallel code inside the skeletons, so that the user wont need to know or code anything related to parallelization. The user only needs to know the semantics of the skletons.
-
-SKL is capable of achieving good performing, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. 
-
-SKL has the ability to activate and deactivate specific layers at compile adapting the implementation of the skeletons to diferent kinds of hardware arquitectures. SKL can activate multiple layers at the same time wich makes hybrid layers of parallelizaion possibly like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algoritmic library.  
-
-
-SKL started as my master dissertation: “Padrões arquitecturais e de desenho para apliacações paralelas / Arquitectural and design patterns for parallel applications”) oriented by Prof. Dr. João Luís Ferreira Sobral. The the aim of the dissertation was to give HPC/parallel applications a better architecture. SKL is, as referred, an algoritmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project. SKL is still being develop. 
-
-
-
-
-
 SKL aims to be an easy-to-use library. This is achieved by encapsulating all the parallel code inside the skeletons, so that the user doesn't need to know or code anything related to parallelization. The user only needs to know the semantics of the skeletons. 
 
 SKL is capable of achieving good performance, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. The library also has the ability to activate and deactivate specific layers at compile time, adapting the implementation of the skeletons to different kinds of hardware architectures. 
@@ -102,8 +89,6 @@ SKL is capable of achieving good performance, because the coupling of the parall
 SKL can activate multiple layers at the same time. This makes hybrid layers of parallelization possible, like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algorithmic library.  
 
 SKL started as my master's thesis: “Padrões arquitecturais e de desenho para apliacações paralelas / Architectural and design patterns for parallel applications”, oriented by Prof. Dr. João Luís Ferreira Sobral. The aim of the dissertation was to give HPC/parallel applications a better architecture. SKL is an algorithmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project and is still being developed. 
-
-
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -145,9 +130,8 @@ Depending on the parallelization layer, you may also need:
           --component skl
     ```
 
-
-
 <p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 
