@@ -1,21 +1,20 @@
 #include "util.hpp"
 
-
 namespace
 {
   TEST(Fusion, IncrementAndMultiplyByTwo)
   {
     std::vector<int> vec(1000);
-    const int a = 7;
+    const int expected_a = 7;
 
     vec
       >>= skl::map(inc())
-      >>= skl::map(mul<a>());
+      >>= skl::map(mul<expected_a>());
 
-    for (int& i : vec) ASSERT_EQ(i, a);
+    for (const int& a : vec) ASSERT_EQ(expected_a, a);
   }
 
-  TEST(Fusion, IncrementAndMultiplyByTwoAndSum)
+  TEST(Fusion, IncrementAndMultiplyByValueAndSum)
   {
     const size_t size(1000);
     const int a(3);
@@ -28,10 +27,10 @@ namespace
       >>= skl::map(mul<a>())
       >>= skl::reduce(std::plus<int>());
 
-    ASSERT_EQ(sum, expected_sum);
+    ASSERT_EQ(expected_sum, sum);
   }
 
-  TEST(Fusion, TwoReduces)
+  TEST(Fusion, ReduceMinMax)
   {
     std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     const int expected_min = 1;
@@ -41,8 +40,8 @@ namespace
       >>= skl::reduce(skl::min<int>())
       >>= skl::reduce(skl::max<int>());
 
-    ASSERT_EQ(min, expected_min);
-    ASSERT_EQ(max, expected_max);
+    ASSERT_EQ(expected_min, min);
+    ASSERT_EQ(expected_max, max);
   }
 
   TEST(Fusion, ReduceAfterAndBeforeMap)
@@ -58,7 +57,7 @@ namespace
       >>= skl::reduce(std::plus<int>());
 
     for (int& i : vec) EXPECT_EQ(i, 1);
-    ASSERT_EQ(sum_before_map, expected_sum_before_map);
-    ASSERT_EQ(sum_after_map, expected_sum_after_map);
+    ASSERT_EQ(expected_sum_before_map, sum_before_map);
+    ASSERT_EQ(expected_sum_after_map, sum_after_map);
   }
 }// namespace

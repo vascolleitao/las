@@ -5,7 +5,7 @@
 namespace skl
 {
   template<class T>
-  concept Aggregate_t = requires(T t)
+  concept aggregate_c = requires(T t)
   {
     t.begin();
     t.end();

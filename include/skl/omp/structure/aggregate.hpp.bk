@@ -1,0 +1,43 @@
+#include <omp.h>
+
+#include "skl/base/structure/aggregate.hpp"
+
+/* Schedulers */
+#include "skl/omp/iterator/scheduler/constant.hpp"
+
+namespace
+{
+  template<typename iterator_t, typename schedule_t>
+  struct schedule_iterator : iterator_t
+  {
+    schedule_iterator(iterator_t iterator, schedule_t schedule)
+      : iterator_t(iterator)
+      , schedule_(schedule)
+    {}
+
+    bool operator!=(const schedule_iterator& rhs)
+    {
+      if (*this == rhs)
+        return schedule_.next(*this, rhs);
+      return true;
+    }
+
+    schedule_t schedule_;
+  };
+}// namespace
+
+namespace skl::_omp
+{
+  template<_base::aggregate_c aggregate_t>
+  struct aggregate_proxy : aggregate_t
+  {
+    aggregate_proxy(aggregate_t& aggregate)
+      : aggregate_(aggregate)
+    {}
+
+    auto begin() { return schedule_iterator<constant>(aggregate_.begin()); }
+    auto end() { return aggregate_.end(); }
+
+    aggregate_t& aggregate_;
+  };
+}// namespace skl::_omp

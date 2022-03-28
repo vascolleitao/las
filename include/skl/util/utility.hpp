@@ -10,7 +10,7 @@ namespace skl
   template<size_t I>
   struct get
   {
-    auto operator()(auto&& ite)
+    constexpr auto operator()(auto&& ite)
     {
       return std::get<I>(ite);
     }
