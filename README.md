@@ -204,7 +204,7 @@ vec
   >>= skl::map(clear());
 ```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://vascolleitao.github.io/skl)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -276,10 +276,6 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/skl.svg?style=for-the-badge
@@ -294,6 +290,3 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 [license-url]: https://github.com/vascolleitao/skl/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vascolleitao
-
-
-
