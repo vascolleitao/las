@@ -2,7 +2,6 @@
 
 
 /* Aggregate */
-#include "skl/base/aggregate/concept.hpp"
 #include "skl/base/aggregate/index.hpp"
 #include "skl/base/aggregate/simple.hpp"
 #include "skl/base/aggregate/zip.hpp"
@@ -15,6 +14,7 @@
 
 /* Structure generation */
 #include "skl/base/structure/decorator.hpp"
+#include "skl/base/structure/aggregate.hpp"
 #include "skl/base/structure/template_method.hpp"
 
 namespace skl
@@ -22,15 +22,23 @@ namespace skl
   struct base
   {
     template<typename skeleton_t>
-    auto add_proxy(skeleton_t skeleton)
+    auto refine_skeleton(const skeleton_t& skeleton)
     {
       return skeleton;
     }
 
-    template<_::template_method_c template_method_t>
-    auto refine(template_method_t template_method)
+    template<decorator_c decorator_t>
+    auto refine_skeleton(const decorator_t& decorator)
+    {
+      return skl::decorator(
+        refine_skeleton(decorator.head),
+        refine_skeleton(decorator.tail));
+    }
+
+    template<template_method_c template_method_t>
+    auto refine_template_method(const template_method_t& template_method)
     {
       return template_method;
     }
   };
-}// namespace skl::base
+}// namespace skl

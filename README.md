@@ -82,14 +82,28 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-SKL aims to be an easy to use library. SKL achieves this by encapsulating all of the parallel code inside the skeletons, so that the user wont need to know/code anything related to parallelization. The user only needs to know the semantics of the skletons.
+SKL aims to be an easy to use library. SKL achieves this by encapsulating all of the parallel code inside the skeletons, so that the user wont need to know or code anything related to parallelization. The user only needs to know the semantics of the skletons.
 
 SKL is capable of achieving good performing, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. 
 
 SKL has the ability to activate and deactivate specific layers at compile adapting the implementation of the skeletons to diferent kinds of hardware arquitectures. SKL can activate multiple layers at the same time wich makes hybrid layers of parallelizaion possibly like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algoritmic library.  
 
 
-SKL started as a master dissertation project with the aim of giving HPC/parallel solutions a better architecture. SKL is, as refered, an algoritmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project. SKL is still being develop. 
+SKL started as my master dissertation: “Padrões arquitecturais e de desenho para apliacações paralelas / Arquitectural and design patterns for parallel applications”) oriented by Prof. Dr. João Luís Ferreira Sobral. The the aim of the dissertation was to give HPC/parallel applications a better architecture. SKL is, as referred, an algoritmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project. SKL is still being develop. 
+
+
+
+
+
+SKL aims to be an easy-to-use library. This is achieved by encapsulating all the parallel code inside the skeletons, so that the user doesn't need to know or code anything related to parallelization. The user only needs to know the semantics of the skeletons. 
+
+SKL is capable of achieving good performance, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. The library also has the ability to activate and deactivate specific layers at compile time, adapting the implementation of the skeletons to different kinds of hardware architectures. 
+
+SKL can activate multiple layers at the same time. This makes hybrid layers of parallelization possible, like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algorithmic library.  
+
+SKL started as my master's thesis: “Padrões arquitecturais e de desenho para apliacações paralelas / Architectural and design patterns for parallel applications”, oriented by Prof. Dr. João Luís Ferreira Sobral. The aim of the dissertation was to give HPC/parallel applications a better architecture. SKL is an algorithmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project and is still being developed. 
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -98,15 +112,15 @@ SKL started as a master dissertation project with the aim of giving HPC/parallel
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may set up SKL project locally.
-By cloning a local copy up and running follow these simple example steps.
+This is an example of how you may set up SKL locally.
+By cloning a local copy and running the following simple example steps.
 
 ### Prerequisites
 
-The prerequisite to install library the full libarary are: 
+The prerequisite to install the library are: 
 * C++ compiler with standard C++20
 
-Depending on the paralelization layer you may also need:
+Depending on the parallelization layer, you may also need:
 * OpenMP 
 
 ### Installation
@@ -151,7 +165,7 @@ vec >>= skl::map(inc());
 
 ### An example of using the reduce skeleton
 
-This example show how to summ all the elemnts of one collection.
+This example shows how to sum all the elements of one collection.
 
 ```cpp
 std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
@@ -169,7 +183,7 @@ auto [min, max] = vec
   >>= skl::reduce(skl::max<int>());
 ```
 
-Note that in this example the first reduce is applyed to the original collection and the second reduce is applyed after computing the "complex_computation" on all elements of the collection. But both reduces are computed with only one loop, like lazy evaluation.
+Note that in this example, the first reduce is applied to the original collection and the second reduce is applied after computing the "complex_computation" on all elements of the collection. But both reduces are computed with only one loop, like lazy evaluation.
 
 ```cpp
 std::vector<int> vec(100);
@@ -181,7 +195,8 @@ auto [sum_before_map, sum_after_map] = vec
 
 ### Example: Skeleton filter
 
-In this example a filter is used to erase the even numbers of a collection by applyn the skeleton map with the functor clear to the filtered ones. 
+In this example, a filter is used to erase the even numbers of a collection, by applying the skeleton map with the functor clear to the filtered ones. 
+
 ```cpp
 std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 vec

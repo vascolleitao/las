@@ -1,51 +1,55 @@
 #pragma once
 
+#include <memory>
 #include <utility>
 #include <omp.h>
 
+#include "skl/omp/structure/skeleton.hpp"
 #include "skl/base/skeleton/reduce.hpp"
-#include "skl/omp/skeleton/proxy.hpp"
 
-namespace skl::omp::skeleton
+namespace skl::_omp
 {
-  template<skl::base::skeleton::reduce_c Super>
-  struct proxy<Super> : Super
+  template<reduce_c Super>
+  struct skeleton_proxy<Super> : Super
   {
     using reduction_t = typename Super::reduction_t;
-    int n_threads;
-    int tid;
-    reduction_t* g_reduction;
 
-    // master ctor
-    proxy(auto&& fn)
-      : Super(fn)
-      , n_threads(omp_get_max_threads())
-      , tid(0)
-      , g_reduction(new reduction_t[n_threads])
-    {
-    }
+    explicit skeleton_proxy(const Super& super)
+      : Super(super)
+      , n_threads_(omp_get_max_threads())
+      , tid_(omp_get_thread_num())
+      , g_reduction_(new reduction_t[n_threads_])
+    {}
 
-    // worker ctor
-    proxy(const proxy& other)
+    explicit skeleton_proxy<Super>(const skeleton_proxy<Super>& other)
       : Super(other)
-      , n_threads(other.n_threads)
-      , tid(omp_get_thread_num())
-      , g_reduction(other.g_reduction)
+      , n_threads_(omp_get_max_threads())
+      , tid_(omp_get_thread_num())
+      , g_reduction_(other.g_reduction_)
+    {}
+
+    int finish()
     {
+      // workers
+      // TODO: should use Super::function_ instead of equality
+      // g_reduction_[tid_] = Super::function_(Super::reduction_, g_reduction_[tid_]);
+      g_reduction_[tid_] = Super::reduction_;
+      return Super::finish();
     }
 
-    auto finish()
+    auto get_result()
     {
-      reduction_t res;
-      std::tie(g_reduction[tid]) = Super::post_for();
-#pragma omp barrier
-#pragma omp master
+      // only master
+      for (int i = 1; i < n_threads_; ++i)
       {
-        res = g_reduction[0];// master is always 0
-        for (int i = 1; i < n_threads; ++i)
-          res = Super::fn_(res, g_reduction[i]);
+        g_reduction_[0] = Super::function_(g_reduction_[0], g_reduction_[i]);
       }
-      return std::make_tuple(res);
+      Super::reduction_ = std::move(g_reduction_[0]);
+      return Super::get_result();
     }
+
+    int n_threads_;
+    int tid_;
+    std::shared_ptr<reduction_t[]> g_reduction_;
   };
-}// namespace skl::omp::skeleton
+}// namespace skl::_omp

@@ -4,17 +4,16 @@
 #include <tuple>
 
 #include "skl/base/skeleton/reduce.hpp"
-#include "skl/cpu/structure/proxy.hpp"
+#include "skl/cpu/structure/skeleton.hpp"
 
 namespace skl::_cpu
 {
   template<reduce_c Super>
-  struct proxy<Super> : Super
+  struct skeleton_proxy<Super> : Super
   {
-    proxy(Super super)
+    skeleton_proxy(const Super& super)
       : Super(super)
-    {
-    }
+    {}
 
     template<typename Iterator>
     constexpr int init(Iterator&& i)
@@ -30,9 +29,9 @@ namespace skl::_cpu
       return 0;
     }
 
-    constexpr auto finish()
+    constexpr int finish()
     {
-      return std::make_tuple(Super::reduction_);
+      return 0;
     }
   };
 }// namespace skl::_cpu

@@ -1,29 +1,63 @@
 #pragma once
 
 #include <tuple>
+#include <omp.h>
 
-namespace skl::omp::scheduler
+namespace skl::_omp::scheduler
 {
-  struct constant
+  template<typename iterator_t>
+  struct static_chunk_t
   {
-    const int id_;
-    const int n_threads_;
+    using iterator = iterator_t;
 
-    constant(int id, int n_threads)
-      : id_(id)
-      , n_threads_(n_threads)
+    constexpr iterator begin() { return begin_; }
+    constexpr iterator end() { return begin_ + size_; }
+
+    constexpr bool operator!=(const static_chunk_t& other) { return index_ != other.index_; }
+
+    static_chunk_t& operator++()
     {
+      ++index_;
+      return *this;
     }
 
-    template<typename Index>
-    std::tuple<Index, Index> next(const Index begin, const Index end)
-    {
-      const auto total_size = end - begin;
-      const auto ite_size = total_size / n_threads_;
-      const auto remainder = total_size % n_threads_;
-      const Index b = begin + id_ * ite_size + (id_ < remainder ? id_ : remainder);
-      const Index e = b + ite_size + (id_ < remainder ? 1 : 0);
-      return { b, (e < end ? e : end) };
-    }
+    int index_;
+    const iterator begin_;
+    const int size_;
   };
-}// namespace skl::omp::scheduler
+
+  template<typename Collection>
+  struct static_t
+  {
+    using iterator_t = typename Collection::iterator;
+    static_t(Collection& c)
+      : c_(c)
+    {}
+
+    static_t(const static_t& other)
+      : c_(other.c_)
+    {}
+
+    auto begin()
+    {
+      const int thread_num = omp_get_thread_num();
+      const int max_threads = omp_get_max_threads();
+      const int total_size = c_.end() - c_.begin();
+      const int size = total_size / max_threads;
+
+      const int remainder = total_size % max_threads;
+      const int thread_size = size + (thread_num < remainder ? 1 : 0);
+      const iterator_t offset = c_.begin() + size * thread_num + (thread_num < remainder ? thread_num : remainder);
+
+      return static_chunk_t<iterator_t>{ 0, offset, thread_size };
+    }
+
+    auto end()
+    {
+      return static_chunk_t<iterator_t>{ 1, c_.end(), -1 };
+    }
+
+    Collection& c_;
+  };
+
+}// namespace skl::_omp::scheduler

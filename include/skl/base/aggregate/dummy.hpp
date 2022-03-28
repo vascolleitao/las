@@ -2,45 +2,44 @@
 
 #include <functional>
 
-namespace skl::iterator
+namespace
 {
   template<typename Data_t>
-  struct dummy : std::iterator<
-                        std::random_access_iterator_tag,    // iterator_category
-                        Data_t,                             // value_type
-                        std::ptrdiff_t ,                    // difference_type
-                        Data_t*,                            // pointer
-                        Data_t&                             // reference
-  >
+  struct dummy_iterator : std::iterator<std::random_access_iterator_tag,// iterator_category
+                            Data_t,// value_type
+                            std::ptrdiff_t,// difference_type
+                            Data_t*,// pointer
+                            Data_t&// reference
+                            >
   {
-
-    explicit dummy(Data_t* ptr) : m_ptr(ptr) {}
+    explicit dummy_iterator(Data_t* ptr)
+      : m_ptr(ptr)
+    {}
 
     Data_t& operator*() const { return *m_ptr; }
     Data_t* operator->() { return m_ptr; }
-    dummy& operator++() { return *this; }
-    dummy operator++(int) { dummy tmp = *this; return tmp; }
-    dummy& operator+=(const long int) { return *this; }
-    friend bool operator== ([[maybe_unused]]const dummy& lhs, [[maybe_unused]]const dummy& rhs) { return true; };
-    friend bool operator!= ([[maybe_unused]]const dummy& lhs, [[maybe_unused]]const dummy& rhs) { return true; };
+    dummy_iterator& operator++() { return *this; }
+    dummy_iterator operator++(int)
+    {
+      dummy_iterator tmp = *this;
+      return tmp;
+    }
+    dummy_iterator& operator+=(const long int) { return *this; }
+    friend bool operator==([[maybe_unused]] const dummy_iterator& lhs, [[maybe_unused]] const dummy_iterator& rhs) { return true; };
+    friend bool operator!=([[maybe_unused]] const dummy_iterator& lhs, [[maybe_unused]] const dummy_iterator& rhs) { return true; };
 
   private:
     Data_t* m_ptr;
   };
 
-} // namespace skl::iterator
-
-
-namespace skl::aggregate
-{
   template<typename Data_t>
-  struct dummy
+  struct dummy_wrapper
   {
-    using iterator = skl::iterator::dummy<Data_t>;
+    using iterator = dummy_iterator<Data_t>;
 
     Data_t var_;
 
-    explicit dummy(Data_t&& var)
+    explicit dummy_wrapper(Data_t&& var)
       : var_(std::forward<Data_t>(var))
     {}
 
@@ -54,7 +53,7 @@ namespace skl::aggregate
       return iterator(&var_);
     }
   };
-} // skl::aggregate
+}// namespace
 
 namespace skl
 {
@@ -62,6 +61,6 @@ namespace skl
   template<typename Data_t>
   auto dummy(Data_t&& var)
   {
-    return aggregate::dummy<Data_t>(std::forward<Data_t>(var));
+    return dummy_wrapper<Data_t>(std::forward<Data_t>(var));
   }
-} // skl
+}// namespace skl

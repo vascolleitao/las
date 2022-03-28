@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Project ####################################################################
 
-project(SKL VERSION 0.1.0)
+project(SKL VERSION 0.2.0)
 configure_file(include/skl/version/config.hpp.in "${CMAKE_CURRENT_SOURCE_DIR}/include/skl/version/config.hpp")
 
 include(cmake/ProjectSettings.cmake)
@@ -12,8 +12,8 @@ include(cmake/CompilerWarnings.cmake)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(skl_options INTERFACE)
-target_compile_options(skl_options INTERFACE -march=native) # -save-temps -fno-omit-frame-pointer
-# target_compile_features(skl_options INTERFACE cxx_std_2b)
+target_compile_options(skl_options INTERFACE -march=native) 
+# -save-temps -fno-omit-frame-pointer
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(skl_warnings INTERFACE)
@@ -37,13 +37,21 @@ target_link_libraries(skl INTERFACE skl_options skl_warnings)
 target_include_directories(skl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 # $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include> $<INSTALL_INTERFACE:include>
 
-option(ENABLE_SKL_OMP_LAYER "Enable skl omp layer" ON)
-if(ENABLE_SKL_OMP_LAYER)
- find_package(OpenMP REQUIRED)
- add_library(skl_omp_layer INTERFACE)
- target_link_libraries(skl_omp_layer INTERFACE OpenMP::OpenMP_CXX)
- target_compile_definitions(skl_omp_layer INTERFACE SKL_OMP)
-endif()
+add_library(skl_cpu_layer INTERFACE)
+target_compile_definitions(skl_cpu_layer INTERFACE SKL_CPU_LAYER)
+
+find_package(OpenMP REQUIRED)
+add_library(skl_omp_layer INTERFACE)
+target_link_libraries(skl_omp_layer INTERFACE OpenMP::OpenMP_CXX)
+target_compile_definitions(skl_omp_layer INTERFACE SKL_OMP_LAYER)
+
+add_library(skl_dynamic_layers INTERFACE)
+target_link_libraries(skl_dynamic_layers INTERFACE skl_cpu_layer skl_omp_layer)
+target_compile_definitions(skl_dynamic_layers INTERFACE SKL_DYNAMIC_LAYERS)
+
+add_library(skl_static_layers INTERFACE)
+target_link_libraries(skl_static_layers INTERFACE)
+target_compile_definitions(skl_static_layers INTERFACE SKL_STATIC_LAYERS)
 
 enable_testing()
 add_subdirectory(test)

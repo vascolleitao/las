@@ -1,28 +1,44 @@
 #pragma once
 
+#include "skl/base/layer.hpp"
+
+/* Structure generation */
+#include "skl/omp/structure/template_method.hpp"
+#include "skl/omp/structure/skeleton.hpp"
+
+/* Schedulers */
+#include "skl/omp/scheduler/constant.hpp"
+
 /* Skeletons */
 #include "skl/omp/skeleton/reduce.hpp"
 
-/* Structure generation */
-#include "skl/omp/skeleton/template_method.hpp"
 
-namespace skl::omp
+namespace skl
 {
   template<typename Super>
-  struct proxy_factory : Super
+  struct omp : Super
   {
-    template<typename Skeleton>
-    static auto refine_skeleton(Skeleton skeleton)
+
+    template<typename skeleton_t>
+    auto refine_skeleton(const skeleton_t& skeleton)
     {
-      auto s = Super::refine_skeleton(skeleton);
-      return skl::omp::skeleton::proxy(s);
+      auto refined_skeleton = Super::refine_skeleton(skeleton);
+      return _omp::skeleton_proxy<decltype(refined_skeleton)>(refined_skeleton);
     }
 
-    template<typename TemplateMethod>
-    static auto refine_template_method(TemplateMethod template_method)
+    template<decorator_c decorator_t>
+    auto refine_skeleton(const decorator_t& decorator)
     {
-      auto tp = Super::refine_template_method(template_method);
-      return skl::omp::template_method_proxy_generate(tp);
+      return skl::decorator(
+        refine_skeleton(decorator.head),
+        refine_skeleton(decorator.tail));
+    }
+
+    template<template_method_c template_method_t>
+    auto refine_template_method(const template_method_t& template_method)
+    {
+      auto refined_template_method = Super::refine_template_method(template_method);
+      return _omp::template_method_proxy<decltype(refined_template_method), _omp::scheduler::static_t>(refined_template_method);
     }
   };
-}// namespace skl::omp
+}// namespace skl

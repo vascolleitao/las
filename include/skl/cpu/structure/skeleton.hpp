@@ -3,11 +3,10 @@
 namespace skl::_cpu
 {
   template<typename Super>
-  struct proxy : Super
+  struct skeleton_proxy : Super
   {
-    proxy(Super super)
+    skeleton_proxy(const Super& super)
       : Super(super)
     {}
   };
-
 }// namespace skl::_cpu

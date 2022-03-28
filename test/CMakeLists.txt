@@ -14,16 +14,27 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(fmt googletest)
 
-set(TEST_LIST "map.cpp;reduce.cpp;fusion.cpp;filter.cpp")
+set(TEST_LIST "main.cpp;map.cpp;reduce.cpp;fusion.cpp;filter.cpp")
 
-# Sequential tests
-add_executable(seq_tests main.cpp ${TEST_LIST})
-target_link_libraries(seq_tests PRIVATE skl gtest_main fmt::fmt)
-add_test(seq_tests seq_tests)
+add_library(skl_test INTERFACE)
+target_link_libraries(skl_test INTERFACE gtest_main fmt::fmt)
 
-# OMP tests
-if(ENABLE_SKL_OMP_LAYER)
- add_executable(omp_tests ${TEST_LIST})
- target_link_libraries(omp_tests PRIVATE skl skl_omp_layer gtest_main fmt::fmt)
- add_test(omp_tests omp_tests)
-endif()
+# Default Sequential tests
+add_executable(default_seq_tests ${TEST_LIST})
+target_link_libraries(default_seq_tests skl_test skl)
+add_test(default_seq_tests default_seq_tests)
+
+# Static Sequential tests
+add_executable(static_seq_tests ${TEST_LIST})
+target_link_libraries(static_seq_tests skl_test skl skl_static_layers skl_cpu_layer)
+add_test(static_seq_tests static_seq_tests)
+
+# Static OMP tests
+add_executable(static_omp_tests ${TEST_LIST} threads.cpp)
+target_link_libraries(static_omp_tests skl_test skl skl_static_layers skl_cpu_layer skl_omp_layer)
+add_test(static_omp_tests static_omp_tests)
+
+# Dynamic Dynamic tests
+add_executable(dynamic_tests ${TEST_LIST})
+target_link_libraries(dynamic_tests skl_test skl skl_dynamic_layers)
+add_test(dynamic_tests dynamic_tests)
