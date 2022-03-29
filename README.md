@@ -116,7 +116,8 @@ Depending on the parallelization layer, you may also need:
     ```
 2. Building
     ```sh
-    cmake -B build -S las
+    cd las
+    cmake -B build -S .
     cmake --build build
     ```
 3. Testing
@@ -127,7 +128,6 @@ Depending on the parallelization layer, you may also need:
     ```sh
     cmake --install build \
           --prefix <INSTALL-DIR> \
-          --component las
     ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -263,7 +263,7 @@ Project Link: [https://github.com/vascolleitao/las](https://github.com/vascollei
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 <!-- [contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg?style=for-the-badge -->
-[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg
+[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg?style=for-the-badge
 [contributors-url]: https://github.com/vascolleitao/las/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/vascolleitao/las.svg?style=for-the-badge
 [forks-url]: https://github.com/vascolleitao/las/network/members

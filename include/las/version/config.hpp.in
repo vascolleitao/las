@@ -5,9 +5,9 @@
 namespace las::version
 {
   // clang-format off
-  constexpr int MAJOR = @SKL_VERSION_MAJOR@;
-  constexpr int MINOR = @SKL_VERSION_MINOR@;
-  constexpr int PATCH = @SKL_VERSION_PATCH@;
+  constexpr int MAJOR = @LAS_VERSION_MAJOR@;
+  constexpr int MINOR = @LAS_VERSION_MINOR@;
+  constexpr int PATCH = @LAS_VERSION_PATCH@;
   // clang-format on
 
   inline std::string to_string()

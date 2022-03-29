@@ -28,14 +28,13 @@ include(cmake/StaticAnalyzers.cmake)
 
 # enable doxygen
 include(cmake/Doxygen.cmake)
-enable_doxygen()
+# enable_doxygen()
 
 # Library #######################################################
 
 add_library(las INTERFACE)
 target_link_libraries(las INTERFACE skl_options skl_warnings)
-target_include_directories(las INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
-# $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include> $<INSTALL_INTERFACE:include>
+target_include_directories(las INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include> $<INSTALL_INTERFACE:include>)
 
 add_library(skl_cpu_layer INTERFACE)
 target_compile_definitions(skl_cpu_layer INTERFACE SKL_CPU_LAYER)
