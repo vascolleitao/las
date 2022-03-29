@@ -2,17 +2,16 @@
 #include <iostream>
 #include <vector>
 
-#include <skl/skl.hpp>
+#include <las/las.hpp>
 
 
-
-int main(int /*argc*/, const char ** /*argv*/)
+int main(int /*argc*/, const char** /*argv*/)
 {
   std::vector<int> vec(10);
 
   /*
-  skl::composition(skl::index(vec)
-      , skl::map([](size_t i, int& x) { x = i; })
+  las::composition(las::index(vec)
+      , las::map([](size_t i, int& x) { x = i; })
   );
   */
 

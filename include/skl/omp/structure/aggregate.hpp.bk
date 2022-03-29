@@ -1,9 +1,9 @@
 #include <omp.h>
 
-#include "skl/base/structure/aggregate.hpp"
+#include "las/base/structure/aggregate.hpp"
 
 /* Schedulers */
-#include "skl/omp/iterator/scheduler/constant.hpp"
+#include "las/omp/iterator/scheduler/constant.hpp"
 
 namespace
 {
@@ -26,7 +26,7 @@ namespace
   };
 }// namespace
 
-namespace skl::_omp
+namespace las::_omp
 {
   template<_base::aggregate_c aggregate_t>
   struct aggregate_proxy : aggregate_t
@@ -40,4 +40,4 @@ namespace skl::_omp
 
     aggregate_t& aggregate_;
   };
-}// namespace skl::_omp
+}// namespace las::_omp

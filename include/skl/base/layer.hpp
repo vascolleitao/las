@@ -2,22 +2,22 @@
 
 
 /* Aggregate */
-#include "skl/base/aggregate/index.hpp"
-#include "skl/base/aggregate/simple.hpp"
-#include "skl/base/aggregate/zip.hpp"
-//#include "skl/base/aggregate/dummy.hpp"
+#include "las/base/aggregate/index.hpp"
+#include "las/base/aggregate/simple.hpp"
+#include "las/base/aggregate/zip.hpp"
+//#include "las/base/aggregate/dummy.hpp"
 
 /* Skeletons */
-#include "skl/base/skeleton/map.hpp"
-#include "skl/base/skeleton/reduce.hpp"
-#include "skl/base/skeleton/filter.hpp"
+#include "las/base/skeleton/map.hpp"
+#include "las/base/skeleton/reduce.hpp"
+#include "las/base/skeleton/filter.hpp"
 
 /* Structure generation */
-#include "skl/base/structure/decorator.hpp"
-#include "skl/base/structure/aggregate.hpp"
-#include "skl/base/structure/template_method.hpp"
+#include "las/base/structure/decorator.hpp"
+#include "las/base/structure/aggregate.hpp"
+#include "las/base/structure/template_method.hpp"
 
-namespace skl
+namespace las
 {
   struct base
   {
@@ -30,7 +30,7 @@ namespace skl
     template<decorator_c decorator_t>
     auto refine_skeleton(const decorator_t& decorator)
     {
-      return skl::decorator(
+      return las::decorator(
         refine_skeleton(decorator.head),
         refine_skeleton(decorator.tail));
     }
@@ -41,4 +41,4 @@ namespace skl
       return template_method;
     }
   };
-}// namespace skl
+}// namespace las

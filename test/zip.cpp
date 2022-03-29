@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-#include <skl/skl.hpp>
+#include <las/las.hpp>
 
 
 int main(int /*argc*/, const char** /*argv*/)
@@ -17,8 +17,7 @@ int main(int /*argc*/, const char** /*argv*/)
     y = 1;
   };
 
-  skl::zip(big_vector, small_vector) >>= 
-      skl::map(init_to_ones);
+  las::zip(big_vector, small_vector) >>= las::map(init_to_ones);
 
   for (auto xi = small_vector.begin(), yi = big_vector.begin(); xi != small_vector.end(); ++xi, ++yi)
   {

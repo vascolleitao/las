@@ -2,4 +2,4 @@
 
 add_executable(axpy axpy/src/main.cpp axpy/src/axpy.cpp)
 
-target_link_libraries(axpy SKL)
+target_link_libraries(axpy LAS)

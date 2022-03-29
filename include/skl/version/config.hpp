@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-namespace skl::version
+namespace las::version
 {
   // clang-format off
   constexpr int MAJOR = 0;
@@ -40,4 +40,4 @@ namespace skl::version
       ;
     return ss.str();
   }
-}// namespace skl::version
+}// namespace las::version

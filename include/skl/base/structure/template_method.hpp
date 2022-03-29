@@ -2,11 +2,12 @@
 
 #include <concepts>
 
-namespace skl
+namespace las
 {
   namespace
   {
-    struct template_method_wrapper { };
+    struct template_method_wrapper
+    {};
     // clang-format off
     template<typename T> struct is_template_method : std::false_type {};
     template<> struct is_template_method<template_method_wrapper> : std::true_type {};
@@ -21,4 +22,4 @@ namespace skl
   {
     return template_method_wrapper();
   }
-}// namespace skl
+}// namespace las

@@ -1,18 +1,18 @@
 #pragma once
 
-#include "skl/base/layer.hpp"
+#include "las/base/layer.hpp"
 
 /* Structure generation */
-#include "skl/cpu/structure/template_method.hpp"
-#include "skl/cpu/structure/skeleton.hpp"
+#include "las/cpu/structure/template_method.hpp"
+#include "las/cpu/structure/skeleton.hpp"
 
 /* Skeletons */
-#include "skl/cpu/skeleton/map.hpp"
-#include "skl/cpu/skeleton/reduce.hpp"
-#include "skl/cpu/skeleton/filter.hpp"
+#include "las/cpu/skeleton/map.hpp"
+#include "las/cpu/skeleton/reduce.hpp"
+#include "las/cpu/skeleton/filter.hpp"
 
 
-namespace skl
+namespace las
 {
   template<typename Super>
   struct cpu : Super
@@ -27,7 +27,7 @@ namespace skl
     template<decorator_c decorator_t>
     auto refine_skeleton(const decorator_t& decorator)
     {
-      return skl::decorator(
+      return las::decorator(
         refine_skeleton(decorator.head),
         refine_skeleton(decorator.tail));
     }
@@ -39,4 +39,4 @@ namespace skl
       return _cpu::template_method_proxy<decltype(refined_template_method)>(refined_template_method);
     }
   };
-}// namespace skl
+}// namespace las

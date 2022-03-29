@@ -1,7 +1,7 @@
 #include <vector>
 #include <span>
 
-#include <skl/skl.hpp>
+#include <las/las.hpp>
 
 #include "matrix_multuplication.hpp"
 
@@ -27,6 +27,6 @@ void compute_matrix_multiplication(const int row_size, std::vector<double>& c, s
     }
   };
 
-  skl::zip(lines_c, lines_a)
-    >>= skl::map(dot_product);
+  las::zip(lines_c, lines_a)
+    >>= las::map(dot_product);
 }

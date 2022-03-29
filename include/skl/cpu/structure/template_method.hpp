@@ -1,8 +1,8 @@
 #pragma once
 
-#include "skl/base/structure/template_method.hpp"
+#include "las/base/structure/template_method.hpp"
 
-namespace skl::_cpu
+namespace las::_cpu
 {
   template<template_method_c Super>
   struct template_method_proxy : public Super
@@ -27,4 +27,4 @@ namespace skl::_cpu
       skeleton.finish();
     }
   };
-}// namespace skl::_cpu
+}// namespace las::_cpu

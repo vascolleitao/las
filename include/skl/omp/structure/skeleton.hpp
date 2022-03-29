@@ -1,6 +1,6 @@
 #pragma once
 
-namespace skl::_omp
+namespace las::_omp
 {
   template<typename Super>
   struct skeleton_proxy : Super
@@ -9,4 +9,4 @@ namespace skl::_omp
       : Super(super)
     {}
   };
-}// namespace skl::_omp
+}// namespace las::_omp

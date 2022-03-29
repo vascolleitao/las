@@ -1,6 +1,6 @@
 #pragma once
 
-namespace skl::_cpu
+namespace las::_cpu
 {
   template<typename Super>
   struct skeleton_proxy : Super
@@ -9,4 +9,4 @@ namespace skl::_cpu
       : Super(super)
     {}
   };
-}// namespace skl::_cpu
+}// namespace las::_cpu

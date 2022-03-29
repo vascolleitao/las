@@ -1,15 +1,15 @@
-#include "skl/refine.hpp"
+#include "las/refine.hpp"
 
 /* Layers */
-#include "skl/base/layer.hpp"
+#include "las/base/layer.hpp"
 #ifdef SKL_CPU_LAYER
-#include "skl/cpu/layer.hpp"
+#include "las/cpu/layer.hpp"
 #endif
 #ifdef SKL_OMP_LAYER
-#include "skl/omp/layer.hpp"
+#include "las/omp/layer.hpp"
 #endif
 
-namespace skl
+namespace las
 {
   template<aggregate_c collection_t, typename skeleton_t>
   auto refine_and_execute(collection_t& collection, const skeleton_t& skeleton)
@@ -32,4 +32,4 @@ namespace skl
       ();
     return refine(collection, skeleton, parallelization_factory);
   }
-}// namespace skl
+}// namespace las

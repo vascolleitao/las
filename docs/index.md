@@ -31,23 +31,23 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/vascolleitao/skl">
+  <a href="https://github.com/vascolleitao/las">
     <img src="images/plum.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">SKL</h3>
+<h3 align="center">LAS</h3>
 
   <p align="center">
-    SKL is an Algorithmic Skeleton Framework with multiple layers of parallelization 
+    LAS is an Algorithmic Skeleton Framework with multiple layers of parallelization 
     <br />
-    <a href="https://github.com/vascolleitao/skl"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/vascolleitao/las"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/vascolleitao/skl">View Demo</a>
+    <a href="https://github.com/vascolleitao/las">View Demo</a>
     ·
-    <a href="https://github.com/vascolleitao/skl/issues">Report Bug</a>
+    <a href="https://github.com/vascolleitao/las/issues">Report Bug</a>
     ·
-    <a href="https://github.com/vascolleitao/skl/issues">Request Feature</a>
+    <a href="https://github.com/vascolleitao/las/issues">Request Feature</a>
   </p>
 </div>
 
@@ -86,7 +86,7 @@ Here is a simple example initializing each element with the number of the corres
 ```cpp
 std::vector<int> vec(1000);
 auto thread_num = [](auto& i) { i = omp_get_thread_num(); };
-vec >>= skl::map(thread_num);
+vec >>= las::map(thread_num);
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -96,7 +96,7 @@ vec >>= skl::map(thread_num);
 
 Vasco Leitão - [@vascolleitao](https://twitter.com/vascolleitao) - vascolleitao@gmail.com
 
-Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascolleitao/skl)
+Project Link: [https://github.com/vascolleitao/las](https://github.com/vascolleitao/las)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -106,16 +106,16 @@ Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascollei
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/skl.svg?style=for-the-badge
-[contributors-url]: https://github.com/vascolleitao/skl/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/vascolleitao/skl.svg?style=for-the-badge
-[forks-url]: https://github.com/vascolleitao/skl/network/members
-[stars-shield]: https://img.shields.io/github/stars/vascolleitao/skl.svg?style=for-the-badge
-[stars-url]: https://github.com/vascolleitao/skl/stargazers
-[issues-shield]: https://img.shields.io/github/issues/vascolleitao/skl.svg?style=for-the-badge
-[issues-url]: https://github.com/vascolleitao/skl/issues
-[license-shield]: https://img.shields.io/github/license/vascolleitao/skl.svg?style=for-the-badge
-[license-url]: https://github.com/vascolleitao/skl/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg?style=for-the-badge
+[contributors-url]: https://github.com/vascolleitao/las/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/vascolleitao/las.svg?style=for-the-badge
+[forks-url]: https://github.com/vascolleitao/las/network/members
+[stars-shield]: https://img.shields.io/github/stars/vascolleitao/las.svg?style=for-the-badge
+[stars-url]: https://github.com/vascolleitao/las/stargazers
+[issues-shield]: https://img.shields.io/github/issues/vascolleitao/las.svg?style=for-the-badge
+[issues-url]: https://github.com/vascolleitao/las/issues
+[license-shield]: https://img.shields.io/github/license/vascolleitao/las.svg?style=for-the-badge
+[license-url]: https://github.com/vascolleitao/las/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vascolleitao
 

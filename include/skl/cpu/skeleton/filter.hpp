@@ -1,9 +1,9 @@
 #pragma once
 
-#include "skl/base/skeleton/filter.hpp"
-#include "skl/cpu/structure/skeleton.hpp"
+#include "las/base/skeleton/filter.hpp"
+#include "las/cpu/structure/skeleton.hpp"
 
-namespace skl::_cpu
+namespace las::_cpu
 {
   template<filter_c Super>
   struct skeleton_proxy<Super> : Super
@@ -30,4 +30,4 @@ namespace skl::_cpu
     }
   };
 
-}// namespace skl::_cpu
+}// namespace las::_cpu

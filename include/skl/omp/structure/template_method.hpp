@@ -3,9 +3,9 @@
 #include <type_traits>
 #include <omp.h>
 
-#include "skl/base/structure/template_method.hpp"
+#include "las/base/structure/template_method.hpp"
 
-namespace skl::_omp
+namespace las::_omp
 {
   template<template_method_c Super, template<typename T> typename scheduler_t>
   struct template_method_proxy : Super
@@ -25,4 +25,4 @@ namespace skl::_omp
       }
     }
   };
-}// namespace skl::_omp
+}// namespace las::_omp

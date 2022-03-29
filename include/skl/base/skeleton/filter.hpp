@@ -2,7 +2,7 @@
 
 #include <concepts>
 
-namespace skl
+namespace las
 {
   namespace
   {
@@ -36,4 +36,4 @@ namespace skl
   {
     return filter_wrapper<Function>(function);
   }
-}// namespace skl
+}// namespace las

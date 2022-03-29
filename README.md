@@ -29,23 +29,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/vascolleitao/skl/tree/develop">
+  <a href="https://github.com/vascolleitao/las">
     <img src="docs/images/plum.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">SKL</h3>
+<h3 align="center">LAS - Layered Algorithmic Skeletons</h3>
 
   <p align="center">
-    SKL is an Algorithmic Skeleton Library with multiple layers of parallelization 
+    LAS is an Algorithmic Skeleton Library with multiple layers of parallelization 
     <br />
-    <a href="https://github.com/vascolleitao/skl"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/vascolleitao/las"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/vascolleitao/skl">View Demo</a>
+    <a href="https://github.com/vascolleitao/las">View Demo</a>
     ·
-    <a href="https://github.com/vascolleitao/skl/issues">Report Bug</a>
+    <a href="https://github.com/vascolleitao/las/issues">Report Bug</a>
     ·
-    <a href="https://github.com/vascolleitao/skl/issues">Request Feature</a>
+    <a href="https://github.com/vascolleitao/las/issues">Request Feature</a>
   </p>
 </div>
 
@@ -82,13 +82,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-SKL aims to be an easy-to-use library. This is achieved by encapsulating all the parallel code inside the skeletons, so that the user doesn't need to know or code anything related to parallelization. The user only needs to know the semantics of the skeletons. 
+LAS aims to be an easy-to-use library. This is achieved by encapsulating all the parallel code inside the skeletons, so that the user doesn't need to know or code anything related to parallelization. The user only needs to know the semantics of the skeletons. 
 
-SKL is capable of achieving good performance, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. The library also has the ability to activate and deactivate specific layers at compile time, adapting the implementation of the skeletons to different kinds of hardware architectures. 
+LAS is capable of achieving good performance, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. The library also has the ability to activate and deactivate specific layers at compile time, adapting the implementation of the skeletons to different kinds of hardware architectures. 
 
-SKL can activate multiple layers at the same time. This makes hybrid layers of parallelization possible, like OpenMP and MPI (not yet!). This makes SKL a very flexible and portable algorithmic library.  
+LAS can activate multiple layers at the same time. This makes hybrid layers of parallelization possible, like OpenMP and MPI (not yet!). This makes LAS a very flexible and portable algorithmic library.  
 
-SKL started as my master's thesis: “Padrões arquitecturais e de desenho para aplicações paralelas / Architectural and design patterns for parallel applications”, oriented by Prof. Dr. João Luís Ferreira Sobral. The aim of the dissertation was to give HPC/parallel applications a better architecture. SKL is an algorithmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project and is still being developed. 
+LAS started as my master's thesis: “Padrões arquitecturais e de desenho para aplicações paralelas / Architectural and design patterns for parallel applications”, oriented by Prof. Dr. João Luís Ferreira Sobral. The aim of the dissertation was to give HPC/parallel applications a better architecture. LAS is an algorithmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project and is still being developed. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -97,7 +97,7 @@ SKL started as my master's thesis: “Padrões arquitecturais e de desenho para 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may set up SKL locally.
+This is an example of how you may set up LAS locally.
 By cloning a local copy and running the following simple example steps.
 
 ### Prerequisites
@@ -112,11 +112,11 @@ Depending on the parallelization layer, you may also need:
 
 1. Clone the repo
     ```sh
-    git clone https://github.com/vascolleitao/skl.git
+    git clone https://github.com/vascolleitao/las.git
     ```
 2. Building
     ```sh
-    cmake -B build -S skl
+    cmake -B build -S las
     cmake --build build
     ```
 3. Testing
@@ -127,7 +127,7 @@ Depending on the parallelization layer, you may also need:
     ```sh
     cmake --install build \
           --prefix <INSTALL-DIR> \
-          --component skl
+          --component las
     ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -144,7 +144,7 @@ Here is a simple example of incrementing all elements of a collection:
 
 ```cpp
 std::vector<int> vec(1000);
-vec >>= skl::map(inc());
+vec >>= las::map(inc());
 ```
 
 ### An example of using the reduce skeleton
@@ -153,7 +153,7 @@ This example shows how to sum all the elements of one collection.
 
 ```cpp
 std::vector<int> vec{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-auto [sum] = vec >>= skl::reduce(std::plus<int>());
+auto [sum] = vec >>= las::reduce(std::plus<int>());
 ```
 
 ### Example: Fusion multiple skeletons together
@@ -163,8 +163,8 @@ This example shows the fusion of two reduces. This operation returns a tuple, th
 ```cpp
 std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 auto [min, max] = vec
-  >>= skl::reduce(skl::min<int>())
-  >>= skl::reduce(skl::max<int>());
+  >>= las::reduce(las::min<int>())
+  >>= las::reduce(las::max<int>());
 ```
 
 Note that in this example, the first reduce is applied to the original collection and the second reduce is applied after computing the "complex_computation" on all elements of the collection. But both reduces are computed with only one loop, like lazy evaluation.
@@ -172,9 +172,9 @@ Note that in this example, the first reduce is applied to the original collectio
 ```cpp
 std::vector<int> vec(100);
 auto [sum_before_map, sum_after_map] = vec
-  >>= skl::reduce(std::plus<int>())
-  >>= skl::map(complex_computation())
-  >>= skl::reduce(std::plus<int>());
+  >>= las::reduce(std::plus<int>())
+  >>= las::map(complex_computation())
+  >>= las::reduce(std::plus<int>());
 ```
 
 ### Example: Skeleton filter
@@ -184,11 +184,11 @@ In this example, a filter is used to erase the even numbers of a collection, by 
 ```cpp
 std::vector<int> vec{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 vec
-  >>= skl::filter(even())
-  >>= skl::map(clear());
+  >>= las::filter(even())
+  >>= las::map(clear());
 ```
 
-_For more examples, please refer to the [Documentation](https://vascolleitao.github.io/skl)_
+_For more examples, please refer to the [Documentation](https://vascolleitao.github.io/las)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -218,7 +218,7 @@ _For more examples, please refer to the [Documentation](https://vascolleitao.git
         - [ ] CUDA 
         - [ ] OpenCL 
 
-See the [open issues](https://github.com/vascolleitao/skl/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/vascolleitao/las/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -256,21 +256,21 @@ Distributed under the GPLv3 License.
 
 Vasco Leitão - [@vascolleitao](https://twitter.com/vascolleitao) - vascolleitao@gmail.com
 
-Project Link: [https://github.com/vascolleitao/skl](https://github.com/vascolleitao/skl)
+Project Link: [https://github.com/vascolleitao/las](https://github.com/vascolleitao/las)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/skl.svg?style=for-the-badge
-[contributors-url]: https://github.com/vascolleitao/skl/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/vascolleitao/skl.svg?style=for-the-badge
-[forks-url]: https://github.com/vascolleitao/skl/network/members
-[stars-shield]: https://img.shields.io/github/stars/vascolleitao/skl.svg?style=for-the-badge
-[stars-url]: https://github.com/vascolleitao/skl/stargazers
-[issues-shield]: https://img.shields.io/github/issues/vascolleitao/skl.svg?style=for-the-badge
-[issues-url]: https://github.com/vascolleitao/skl/issues
-[license-shield]: https://img.shields.io/github/license/vascolleitao/skl.svg?style=for-the-badge
-[license-url]: https://github.com/vascolleitao/skl/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg?style=for-the-badge
+[contributors-url]: https://github.com/vascolleitao/las/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/vascolleitao/las.svg?style=for-the-badge
+[forks-url]: https://github.com/vascolleitao/las/network/members
+[stars-shield]: https://img.shields.io/github/stars/vascolleitao/las.svg?style=for-the-badge
+[stars-url]: https://github.com/vascolleitao/las/stargazers
+[issues-shield]: https://img.shields.io/github/issues/vascolleitao/las.svg?style=for-the-badge
+[issues-url]: https://github.com/vascolleitao/las/issues
+[license-shield]: https://img.shields.io/github/license/vascolleitao/las.svg?style=for-the-badge
+[license-url]: https://github.com/vascolleitao/las/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vascolleitao

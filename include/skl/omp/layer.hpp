@@ -1,19 +1,19 @@
 #pragma once
 
-#include "skl/base/layer.hpp"
+#include "las/base/layer.hpp"
 
 /* Structure generation */
-#include "skl/omp/structure/template_method.hpp"
-#include "skl/omp/structure/skeleton.hpp"
+#include "las/omp/structure/template_method.hpp"
+#include "las/omp/structure/skeleton.hpp"
 
 /* Schedulers */
-#include "skl/omp/scheduler/constant.hpp"
+#include "las/omp/scheduler/constant.hpp"
 
 /* Skeletons */
-#include "skl/omp/skeleton/reduce.hpp"
+#include "las/omp/skeleton/reduce.hpp"
 
 
-namespace skl
+namespace las
 {
   template<typename Super>
   struct omp : Super
@@ -29,7 +29,7 @@ namespace skl
     template<decorator_c decorator_t>
     auto refine_skeleton(const decorator_t& decorator)
     {
-      return skl::decorator(
+      return las::decorator(
         refine_skeleton(decorator.head),
         refine_skeleton(decorator.tail));
     }
@@ -41,4 +41,4 @@ namespace skl
       return _omp::template_method_proxy<decltype(refined_template_method), _omp::scheduler::static_t>(refined_template_method);
     }
   };
-}// namespace skl
+}// namespace las

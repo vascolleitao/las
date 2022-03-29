@@ -4,15 +4,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Project ####################################################################
 
-project(SKL VERSION 0.2.0)
-configure_file(include/skl/version/config.hpp.in "${CMAKE_CURRENT_SOURCE_DIR}/include/skl/version/config.hpp")
+project(LAS VERSION 0.2.0)
+configure_file(include/las/version/config.hpp.in "${CMAKE_CURRENT_SOURCE_DIR}/include/las/version/config.hpp")
 
 include(cmake/ProjectSettings.cmake)
 include(cmake/CompilerWarnings.cmake)
 
 # Link this 'library' to set the c++ standard / compile-time options requested
 add_library(skl_options INTERFACE)
-target_compile_options(skl_options INTERFACE -march=native) 
+target_compile_options(skl_options INTERFACE -march=native)
 # -save-temps -fno-omit-frame-pointer
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
@@ -32,9 +32,9 @@ enable_doxygen()
 
 # Library #######################################################
 
-add_library(skl INTERFACE)
-target_link_libraries(skl INTERFACE skl_options skl_warnings)
-target_include_directories(skl INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+add_library(las INTERFACE)
+target_link_libraries(las INTERFACE skl_options skl_warnings)
+target_include_directories(las INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 # $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include> $<INSTALL_INTERFACE:include>
 
 add_library(skl_cpu_layer INTERFACE)

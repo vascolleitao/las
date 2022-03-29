@@ -8,7 +8,7 @@ namespace
     int expected_sum = 0;
     for (const auto& i : vec) expected_sum += i;
 
-    auto [sum] = vec >>= skl::reduce(std::plus<int>());
+    auto [sum] = vec >>= las::reduce(std::plus<int>());
 
     ASSERT_EQ(expected_sum, sum);
   }
@@ -19,7 +19,7 @@ namespace
     int expected_sum = 0;
     for (const auto& i : vec) expected_sum += i;
 
-    auto [sum] = vec >>= skl::reduce(std::plus<int>());
+    auto [sum] = vec >>= las::reduce(std::plus<int>());
 
     ASSERT_EQ(expected_sum, sum);
   }

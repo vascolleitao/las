@@ -3,7 +3,7 @@
 #include <tuple>
 #include <omp.h>
 
-namespace skl::_omp::scheduler
+namespace las::_omp::scheduler
 {
   template<typename iterator_t>
   struct static_chunk_t
@@ -60,4 +60,4 @@ namespace skl::_omp::scheduler
     Collection& c_;
   };
 
-}// namespace skl::_omp::scheduler
+}// namespace las::_omp::scheduler

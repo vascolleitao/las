@@ -2,7 +2,7 @@
 
 #include <concepts>
 
-namespace skl
+namespace las
 {
   namespace
   {
@@ -37,4 +37,4 @@ namespace skl
     return map_wrapper<Function>(function);
   }
 
-}// namespace skl
+}// namespace las

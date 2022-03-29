@@ -2,7 +2,7 @@
 
 #include <tuple>
 
-namespace skl
+namespace las
 {
   namespace
   {
@@ -65,4 +65,4 @@ namespace skl
   {
     return decorator_wrapper<skeleton_head_t, skeleton_tail_t>(skeleton_head, skeleton_tail);
   }
-}// namespace skl
+}// namespace las

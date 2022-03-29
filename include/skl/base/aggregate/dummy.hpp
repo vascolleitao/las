@@ -55,7 +55,7 @@ namespace
   };
 }// namespace
 
-namespace skl
+namespace las
 {
   // as a function for automatic type deduction
   template<typename Data_t>
@@ -63,4 +63,4 @@ namespace skl
   {
     return dummy_wrapper<Data_t>(std::forward<Data_t>(var));
   }
-}// namespace skl
+}// namespace las

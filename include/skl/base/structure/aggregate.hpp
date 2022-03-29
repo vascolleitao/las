@@ -2,7 +2,7 @@
 
 #include <concepts>
 
-namespace skl
+namespace las
 {
   template<class T>
   concept aggregate_c = requires(T t)
@@ -10,4 +10,4 @@ namespace skl
     t.begin();
     t.end();
   };
-}// namespace skl
+}// namespace las

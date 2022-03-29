@@ -20,7 +20,7 @@ namespace
   };
 }// namespace
 
-namespace skl
+namespace las
 {
   template<typename Collection>
   auto simple(Collection&& collection)
@@ -28,4 +28,4 @@ namespace skl
     return simple_wrapper<Collection>(std::forward<Collection>(collection));
   }
 
-}// namespace skl
+}// namespace las

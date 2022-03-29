@@ -1,9 +1,9 @@
 #pragma once
 
-#include "skl/base/skeleton/map.hpp"
-#include "skl/cpu/structure/skeleton.hpp"
+#include "las/base/skeleton/map.hpp"
+#include "las/cpu/structure/skeleton.hpp"
 
-namespace skl::_cpu
+namespace las::_cpu
 {
   template<map_c Super>
   struct skeleton_proxy<Super> : Super
@@ -31,4 +31,4 @@ namespace skl::_cpu
       return 0;
     }
   };
-}// namespace skl::_cpu
+}// namespace las::_cpu

@@ -21,20 +21,20 @@ target_link_libraries(skl_test INTERFACE gtest_main fmt::fmt)
 
 # Default Sequential tests
 add_executable(default_seq_tests ${TEST_LIST})
-target_link_libraries(default_seq_tests skl_test skl)
+target_link_libraries(default_seq_tests skl_test las)
 add_test(default_seq_tests default_seq_tests)
 
 # Static Sequential tests
 add_executable(static_seq_tests ${TEST_LIST})
-target_link_libraries(static_seq_tests skl_test skl skl_static_layers skl_cpu_layer)
+target_link_libraries(static_seq_tests skl_test las skl_static_layers skl_cpu_layer)
 add_test(static_seq_tests static_seq_tests)
 
 # Static OMP tests
 add_executable(static_omp_tests ${TEST_LIST} threads.cpp)
-target_link_libraries(static_omp_tests skl_test skl skl_static_layers skl_cpu_layer skl_omp_layer)
+target_link_libraries(static_omp_tests skl_test las skl_static_layers skl_cpu_layer skl_omp_layer)
 add_test(static_omp_tests static_omp_tests)
 
 # Dynamic Dynamic tests
 add_executable(dynamic_tests ${TEST_LIST})
-target_link_libraries(dynamic_tests skl_test skl skl_dynamic_layers)
+target_link_libraries(dynamic_tests skl_test las skl_dynamic_layers)
 add_test(dynamic_tests dynamic_tests)

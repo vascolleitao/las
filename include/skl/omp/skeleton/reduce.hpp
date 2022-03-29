@@ -4,10 +4,10 @@
 #include <utility>
 #include <omp.h>
 
-#include "skl/omp/structure/skeleton.hpp"
-#include "skl/base/skeleton/reduce.hpp"
+#include "las/omp/structure/skeleton.hpp"
+#include "las/base/skeleton/reduce.hpp"
 
-namespace skl::_omp
+namespace las::_omp
 {
   template<reduce_c Super>
   struct skeleton_proxy<Super> : Super
@@ -52,4 +52,4 @@ namespace skl::_omp
     int tid_;
     std::shared_ptr<reduction_t[]> g_reduction_;
   };
-}// namespace skl::_omp
+}// namespace las::_omp

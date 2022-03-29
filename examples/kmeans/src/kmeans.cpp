@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <skl/skl.hpp>
+#include <las/las.hpp>
 
 auto point_assignment = [](const std::tuple<point, cluster_id, size_t>& ite) {
   return std::make_tuple(std::get<1>(ite), std::get<0>(ite));
@@ -76,18 +76,18 @@ struct compute_clusters
 void compute_kmeans(std::vector<point>& points, std::vector<cluster_id>& ids, std::vector<point>& centroid)
 {
   k_centroid = centroid.size();
-  auto [centroid_acc] = skl::zip(points, ids, skl::dummy<size_t>(0))
-    >>= skl::reduce(insert_point(), point_assignment);
+  auto [centroid_acc] = las::zip(points, ids, las::dummy<size_t>(0))
+    >>= las::reduce(insert_point(), point_assignment);
 
   size_t changes = 0;
   do
   {
     repair_empty_clusters(points, ids, centroid, centroid_acc.acc);
     for (size_t j = 0; j < k_centroid; ++j) centroid[j] = centroid_acc[j].mean();
-    std::tie(centroid_acc, changes) = skl::zip(points, ids, skl::dummy<size_t>(0))
-    >>= skl::map(compute_clusters(centroid))
-    >>= skl::reduce(insert_point(), [](auto& ite) {
+    std::tie(centroid_acc, changes) = las::zip(points, ids, las::dummy<size_t>(0))
+    >>= las::map(compute_clusters(centroid))
+    >>= las::reduce(insert_point(), [](auto& ite) {
       return std::make_tuple(std::get<1>(ite), std::get<0>(ite)); })
-    >>= skl::reduce(std::plus<size_t>(), skl::get<2>()) );
+    >>= las::reduce(std::plus<size_t>(), las::get<2>()) );
   } while (changes != 0);
 }

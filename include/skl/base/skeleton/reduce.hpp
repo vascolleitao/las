@@ -3,7 +3,7 @@
 #include <utility>
 #include <tuple>
 
-namespace skl
+namespace las
 {
   namespace
   {
@@ -40,4 +40,4 @@ namespace skl
     return reduce_wrapper<Function>(function);
   }
 
-}// namespace skl
+}// namespace las
