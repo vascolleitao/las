@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/vascolleitao/las">
-    <img src="docs/images/plum.png" alt="Logo" width="80" height="80">
+    <img src="docs/images/logo/linkedin_banner_image_2.png" alt="Logo">
   </a>
 
 <h3 align="center">LAS - Layered Algorithmic Skeletons</h3>
