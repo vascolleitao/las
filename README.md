@@ -116,8 +116,7 @@ Depending on the parallelization layer, you may also need:
     ```
 2. Building
     ```sh
-    cd las
-    cmake -B build -S .
+    cmake -B build -S las
     cmake --build build
     ```
 3. Testing
@@ -127,7 +126,7 @@ Depending on the parallelization layer, you may also need:
 4. Installing
     ```sh
     cmake --install build \
-          --prefix <INSTALL-DIR> \
+          --prefix <INSTALL-DIR> 
     ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

@@ -67,6 +67,11 @@
 ## Getting Started
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+LAS has three modes of utilization:
+ - Default: only uses  the sequential layer;
+ - Static: uses the layers specified by de user at compile time by passing compile definitions;
+ - Dynamic: compiling all the layers and choses the and choses the best one for a specific collection and skeleton. 
+
 <!-- Documentation -->
 ## Documentation
 
