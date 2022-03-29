@@ -38,7 +38,7 @@
   <p align="center">
     LAS is an Algorithmic Skeleton Library with multiple layers of parallelization 
     <br />
-    <a href="https://github.com/vascolleitao/las"><strong>Explore the docs »</strong></a>
+    <a href="https://vascolleitao.github.io/las"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/vascolleitao/las">View Demo</a>
