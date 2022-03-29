@@ -262,7 +262,8 @@ Project Link: [https://github.com/vascolleitao/las](https://github.com/vascollei
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg?style=for-the-badge
+<!-- [contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg?style=for-the-badge -->
+[contributors-shield]: https://img.shields.io/github/contributors/vascolleitao/las.svg
 [contributors-url]: https://github.com/vascolleitao/las/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/vascolleitao/las.svg?style=for-the-badge
 [forks-url]: https://github.com/vascolleitao/las/network/members
