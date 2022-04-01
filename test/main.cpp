@@ -5,7 +5,6 @@
 GTEST_API_ int main(int argc, char** argv)
 {
   // fmt::print("Running main() from {}\n", __FILE__);
-  // fmt::print("Running las version {}.{}.{}\n", las::version::MAJOR, las::version::MINOR, las::version::PATCH);
   fmt::print("Running las version {}\n", las::version::to_string());
   fmt::print("Running las using {}\n", las::version::active_layers());
 
