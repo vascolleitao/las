@@ -88,7 +88,7 @@ Because the parallelization layers are coupled at compile time using inheritance
 
 Multiple layers can be activated at the same time using LAS. This allows for hybrid levels of parallelization, such as OpenMP and MPI (albeit not yet!). As a result, LAS is a highly adaptable and portable algorithmic library.
 
-LAS began as a master's thesis entitled "Architectural and design patterns for parallel applications," oriented by Prof. Dr. João Luís Ferreira Sobral. The dissertation's goal was to improve the architecture of HPC/parallel applications. LAS is an algorithmic skeleton library that uses numerous layers of parallelization to implement skeletons. This is a continuation of the original private project, which is currently in development.
+LAS began as a master's thesis entitled "Padrões arquitecturais e de desenho para aplicações paralelas" (Architectural and Design Patterns for parallel applications) oriented by Prof. Dr. João Luís Ferreira Sobral. The dissertation's goal was to improve the architecture of HPC/parallel applications. LAS is an algorithmic skeleton library that uses numerous layers of parallelization to implement skeletons. This is a continuation of the original private project, which is currently in development.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
