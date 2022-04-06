@@ -82,13 +82,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-LAS aims to be an easy-to-use library. This is achieved by encapsulating all the parallel code inside the skeletons, so that the user doesn't need to know or code anything related to parallelization. The user only needs to know the semantics of the skeletons. 
+LAS aspires to be a user-friendly library. This is accomplished by encapsulating all parallel functionality within the skeletons, removing the requirement for the user to understand or code anything about parallelization. The user simply needs to understand the skeletons' semantics.
 
-LAS is capable of achieving good performance, because the coupling of the parallelization layers is made at compile time with the use of inheritance and templates. The library also has the ability to activate and deactivate specific layers at compile time, adapting the implementation of the skeletons to different kinds of hardware architectures. 
+Because the parallelization layers are coupled at compile time using inheritance and templates, LAS is capable of obtaining good performance. The library may also activate and deactivate certain layers at compile time, allowing the skeletons to be implemented on a variety of hardware architectures.
 
-LAS can activate multiple layers at the same time. This makes hybrid layers of parallelization possible, like OpenMP and MPI (not yet!). This makes LAS a very flexible and portable algorithmic library.  
+Multiple layers can be activated at the same time using LAS. This allows for hybrid levels of parallelization, such as OpenMP and MPI (albeit not yet!). As a result, LAS is a highly adaptable and portable algorithmic library.
 
-LAS started as my master's thesis: “Padrões arquitecturais e de desenho para aplicações paralelas / Architectural and design patterns for parallel applications”, oriented by Prof. Dr. João Luís Ferreira Sobral. The aim of the dissertation was to give HPC/parallel applications a better architecture. LAS is an algorithmic skeleton library implementing the skeletons with multiple layers of parallelization. This is a fork of the original private project and is still being developed. 
+LAS began as a master's thesis entitled "Architectural and design patterns for parallel applications," oriented by Prof. Dr. João Luís Ferreira Sobral. The dissertation's goal was to improve the architecture of HPC/parallel applications. LAS is an algorithmic skeleton library that uses numerous layers of parallelization to implement skeletons. This is a continuation of the original private project, which is currently in development.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -200,7 +200,7 @@ _For more examples, please refer to the [Documentation](https://vascolleitao.git
     - [X] Map
     - [X] Reduce
     - [X] Fusion
-    - [ ] Filter
+    - [X] Filter
 - Adapters
     - [X] Simple
     - [X] Index
@@ -271,6 +271,6 @@ Project Link: [https://github.com/vascolleitao/las](https://github.com/vascollei
 [issues-shield]: https://img.shields.io/github/issues/vascolleitao/las.svg?style=for-the-badge
 [issues-url]: https://github.com/vascolleitao/las/issues
 [license-shield]: https://img.shields.io/github/license/vascolleitao/las.svg?style=for-the-badge
-[license-url]: https://github.com/vascolleitao/las/blob/master/LICENSE.txt
+[license-url]: https://github.com/vascolleitao/las/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/vascolleitao
