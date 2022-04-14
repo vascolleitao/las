@@ -28,23 +28,24 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/vascolleitao/las">
-    <img src="docs/images/logo/linkedin_banner_image_2.png" alt="Logo">
-  </a>
+  <a href="https://github.com/vascolleitao/las">
+    <img src="docs/images/logo/linkedin_banner_image_2.png" alt="Logo">
+  </a>
+
 <h3 align="center">LAS - Layered Algorithmic Skeletons</h3>
 
-  <p align="center">
-    LAS is an Algorithmic Skeleton Library with multiple layers of parallelization 
-    <br />
-    <a href="https://vascolleitao.github.io/las"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/vascolleitao/las">View Demo</a>
-    ·
-    <a href="https://github.com/vascolleitao/las/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/vascolleitao/las/issues">Request Feature</a>
-  </p>
+  <p align="center">
+    LAS is an Algorithmic Skeleton Library with multiple layers of parallelization 
+    <br />
+    <a href="https://vascolleitao.github.io/las"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/vascolleitao/las">View Demo</a>
+    ·
+    <a href="https://github.com/vascolleitao/las/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/vascolleitao/las/issues">Request Feature</a>
+  </p>
 </div>
 
 
@@ -202,8 +203,7 @@ This example computes the multiplication pointwise of two vectors *vx* and *vy* 
 
 ```cpp
 las::zip(vx, vy, vr) 
-  >>= las::map(
-    [](const auto& x, const auto& y, auto& r){ r = x*y;});
+  >>= las::map([](const auto& x, const auto& y, auto& r){ r = x*y;});
 ```
 
 ### Adapter Index
@@ -258,9 +258,9 @@ As expected, the matrix multiplication has good speedups due to being more compu
 In the k-means problem, as seen in the plot, the speedup of las with the omp layer has a problem, which can be partially explained by the fusion of multiple reduces, which makes LAS use multiple barriers to synchronize the threads instead of just one. With the LAS using the c++11 threads layer, this problem didn't occur because the fusion was explicitly programmed.
 
 <p style="background-color:white">
-  <img src="docs/images/speedup/axpy.svg" width="32%" />
-  <img src="docs/images/speedup/matrix_multiplication.svg" width="32%" />
-  <img src="docs/images/speedup/kmeans.svg" width="32%" /> 
+  <img src="docs/images/speedup/axpy.svg" width="32%" />
+  <img src="docs/images/speedup/matrix_multiplication.svg" width="32%" />
+  <img src="docs/images/speedup/kmeans.svg" width="32%" /> 
 </p>
 
 Note that using the LAS library with only the sequential layer had the same performance as implementation without skeletons.
