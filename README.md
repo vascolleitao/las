@@ -277,16 +277,16 @@ As it was expected the matrix multiplication has a good speedups due to being mo
 In the k-means problem as can be seen in the plot the speedup of which can be, at least partially, by being the fusion of multiple reduces, this makes LAS use multiple barriers to synchronize the threads instead of just once. With the LAS using the c++11 threads layer this problem didn't ocurred because the fusion was made manually.
 
 <style>
-  .div-speedup-plots { 
-    background-color: #FFFFFF
-  }
+  .div-speedup-plots { background-color: #FFFFFF }
 </style>
 <div class="div-speedup-plots">
+
 <p float="left">
   <img src="docs/images/speedup/axpy.svg" width="32%" />
   <img src="docs/images/speedup/matrix_multiplication.svg" width="32%" />
   <img src="docs/images/speedup/kmeans.svg" width="32%" /> 
 </p>
+
 </div>
 
 Note that, the use of the LAS library with only the sequential layer had the same performance as implementing them directly.
