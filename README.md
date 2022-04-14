@@ -25,14 +25,12 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/vascolleitao/las">
     <img src="docs/images/logo/linkedin_banner_image_2.png" alt="Logo">
   </a>
-
 <h3 align="center">LAS - Layered Algorithmic Skeletons</h3>
 
   <p align="center">
@@ -50,41 +48,39 @@
 </div>
 
 
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#usage">Usage</a>
-      <ul>
-        <li><a href="#map">Map</a></li>   
-        <li><a href="#reduce">Reduce</a></li>    
-        <li><a href="#fusion">Fusion</a></li>      
-        <li><a href="#filter">Filter</a></li>      
-        <li><a href="#adapter-zip">Adapter Zip</a></li>        
-        <li><a href="#adapter-index">Adapter Index</a></li>          
-        <li><a href="#adapter-dummy">Adapter Dummy</a></li>          
-        <li><a href="#omp-layer">OMP layer</a></li>          
-      </ul>
-    </li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#benchmark">Benchmark</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
+<summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#map">Map</a></li>
+        <li><a href="#reduce">Reduce</a></li>
+        <li><a href="#fusion">Fusion</a></li>
+        <li><a href="#filter">Filter</a></li>
+        <li><a href="#adapter-zip">Adapter Zip</a></li>
+        <li><a href="#adapter-index">Adapter Index</a></li>
+        <li><a href="#adapter-dummy">Adapter Dummy</a></li>
+        <li><a href="#omp-layer">OMP layer</a></li>
+      </ul>
+    </li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#benchmark">Benchmark</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
 </details>
 
 
