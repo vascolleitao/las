@@ -193,9 +193,16 @@ _For more examples, please refer to the [Documentation](https://vascolleitao.git
 
 <!-- Benchmark -->
 ## Benchmark
+Axpy | K-means | Matrix Multi
+:---:|:-------:| :-------------------:
+![Speedup axpy](docs/images/speedup/speedup-axpy.svg "Speedup axpy") | ![Speedup k-means](docs/images/speedup/speedup-kmeans.svg "Speedup k-means") | ![Speedup matrix multiplication](docs/images/speedup/speedup-mm.svg "Speedup matrix multiplication")
 
-![Speedup axpy](docs/images/speedup/speedup-axpy.svg "Speedup axpy") ![Speedup k-means](docs/images/speedup/speedup-kmeans.svg "Speedup k-means") ![Speedup matrix multiplication](docs/images/speedup/speedup-mm.svg "Speedup matrix multiplication")
 
+<p float="left">
+  <img src="docs/images/speedup/speedup-axpy.svg" width="100" />
+  <img src="docs/images/speedup/speedup-kmeans.svg" width="100" /> 
+  <img src="docs/images/speedup/speedup-mm.svg" width="100" />
+</p>
 
 <!-- ROADMAP -->
 ## Roadmap
