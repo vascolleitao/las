@@ -118,23 +118,23 @@ The prerequisites to install the library are:
 ### Installation
 
 1. Clone the repo
-    ```sh
-    git clone https://github.com/vascolleitao/las.git
-    ```
+```sh
+  git clone https://github.com/vascolleitao/las.git
+```
 2. Building
-    ```sh
-    cmake -B build -S las
-    cmake --build build
-    ```
+```sh
+  cmake -B build -S las
+  cmake --build build
+```
 3. Testing
-    ```sh
-    ctest --ctest-dir build
-    ```
+```sh
+  ctest --ctest-dir build
+```
 4. Installing
-    ```sh
-    cmake --install build \
-          --prefix <INSTALL-DIR> 
-    ```
+```sh
+  cmake --install build \
+        --prefix <INSTALL-DIR> 
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
