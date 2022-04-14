@@ -276,25 +276,25 @@ _For more examples, please refer to the [Documentation](https://vascolleitao.git
 ## Roadmap
 
 - Skeletons
-    - [X] Map
-    - [X] Reduce
-    - [X] Fusion
-    - [X] Filter
+  - [X] Map
+  - [X] Reduce
+  - [X] Fusion
+  - [X] Filter
 - Adapters
-    - [X] Simple
-    - [X] Index
-    - [X] Zip
-    - [ ] Reverse
+  - [X] Simple
+  - [X] Index
+  - [X] Zip
+  - [ ] Reverse
 - Parallelization
-    - [X] Shared memory layer
-        - [X] OMP 
-        - [X] C++11 threads 
-        - [ ] TBB 
-    - [ ] Distributed memory layer
-        - [ ] MPI 
-    - [ ] GPU layer
-        - [ ] CUDA 
-        - [ ] OpenCL 
+  - [X] Shared memory layer
+    - [X] OMP 
+    - [X] C++11 threads 
+    - [ ] TBB 
+  - [ ] Distributed memory layer
+    - [ ] MPI 
+  - [ ] GPU layer
+    - [ ] CUDA 
+    - [ ] OpenCL 
 
 See the [open issues](https://github.com/vascolleitao/las/issues) for a full list of proposed features (and known issues).
 
