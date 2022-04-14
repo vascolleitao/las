@@ -191,6 +191,10 @@ _For more examples, please refer to the [Documentation](https://vascolleitao.git
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- Benchmark -->
+## Benchmark
+
+![Speedup axpy](docs/images/speedup/speedup-axpy.svg "Speedup axpy") ![Speedup k-means](docs/images/speedup/speedup-kmeans.svg "Speedup k-means") ![Speedup matrix multiplication](docs/images/speedup/speedup-mm.svg "Speedup matrix multiplication")
 
 
 <!-- ROADMAP -->

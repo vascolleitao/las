@@ -3,7 +3,7 @@
 
 #include <las/las.hpp>
 
-#include "matrix_multuplication.hpp"
+#include "matrix_multiplication.hpp"
 
 void compute_matrix_multiplication(const int row_size, std::vector<double>& c, std::vector<double>& a, std::vector<double>& b)
 {
