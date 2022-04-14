@@ -70,11 +70,6 @@
 ## Getting Started
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-LAS has three modes of utilization:
- - Default: only uses  the sequential layer;
- - Static: uses the layers specified by de user at compile time by passing compile definitions;
- - Dynamic: compiling all the layers and choses the and choses the best one for a specific collection and skeleton. 
-
 <!-- Documentation -->
 ## Documentation
 
@@ -87,15 +82,7 @@ See the master's thesis document
 <!-- Examples -->
 ## Examples
 
-### Using the map skeleton with threads
 
-Here is a simple example initializing each element with the number of the corresponding thread.
-
-```cpp
-std::vector<int> vec(1000);
-auto thread_num = [](auto& i) { i = omp_get_thread_num(); };
-vec >>= las::map(thread_num);
-```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

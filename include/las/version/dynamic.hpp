@@ -11,7 +11,7 @@ namespace las
   auto refine_and_execute(collection_t& collection, const skeleton_t& skeleton)
   {
     /*
-     * TODO: Implement logic to choose layers dynamicaly
+     * TODO: Implement logic to choose layers dynamically
      * for example, using machine learning algorithms
      */
     if (collection.size() < 1000)

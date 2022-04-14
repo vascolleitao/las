@@ -3,9 +3,9 @@
 #include "las/util/utility.hpp"
 #include "las/base/layer.hpp"
 
-#ifdef SKL_STATIC_LAYERS
+#ifdef LAS_STATIC_LAYERS
 #include "las/version/static.hpp"
-#elif SKL_DYNAMIC_LAYERS
+#elif LAS_DYNAMIC_LAYERS
 #include "las/version/dynamic.hpp"
 #else
 #include "las/version/default.hpp"

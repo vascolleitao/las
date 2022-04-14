@@ -22,16 +22,16 @@ namespace las::version
     std::stringstream ss;
     ss
 
-#ifdef SKL_STATIC_LAYERS
+#ifdef LAS_STATIC_LAYERS
       << "static layers: "
-#ifdef SKL_CPU_LAYER
+#ifdef LAS_CPU_LAYER
       << "cpu"
 #endif
-#ifdef SKL_OMP_LAYER
+#ifdef LAS_OMP_LAYER
       << ", omp"
 #endif
 
-#elif SKL_DYNAMIC_LAYERS
+#elif LAS_DYNAMIC_LAYERS
       << "dynamic layers"
 #else
 
