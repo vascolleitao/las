@@ -143,7 +143,7 @@ As explained above, LAS has a layered architecture that permits its utilization 
  - Static: uses compile definitions to use specific layers at compile-time;
  - Dynamic: compiles all the layers and chooses the best one for a specific collection and skeleton(s). 
 
-You can choose one of these modes at compile time by linking the executable with the respective libraries: *las*, *las_static* or *las_dynamic*. If you link it with *las_static*, you also need to link it with the specific layers (e.g., *las_cpu_layer* and *las_omp_layer*).
+You can choose one of these modes at compile time by linking the executable with the respective libraries: `las`, `las_static` or `las_dynamic`. If you link it with `las_static`, you also need to link it with the specific layers (e.g., `las_cpu_layer` and `las_omp_layer`).
 
 Next, you can see various examples of the utilization of skeletons.
 
@@ -177,8 +177,8 @@ auto [min, max] = vec
   >>= las::reduce(las::max<int>());
 ```
 
-Note that the first reduce is applied to the original collection, and the second reduce is applied after mapping "complex_computation" to all collection elements. But both reduces are computed in the same loop.
-
+Note that the first reduce is applied to the original collection, and the second reduce is applied after mapping `complex_computation` to all collection elements. But both reduces are computed in the same loop.
+`
 ```cpp
 std::vector<int> vec(100);
 auto [sum_before_map, sum_after_map] = vec
@@ -199,7 +199,7 @@ vec >>= las::filter(even())
 ### Adapter Zip
 
 This example shows how you can apply the zip adapter to allow the iteration of multiple collections simultaneously.
-This example computes the multiplication pointwise of two vectors *vx* and *vy* and stores the resulting vector on *vz*.
+This example computes the multiplication pointwise of two vectors `vx` and `vy` and stores the resulting vector on `vz`.
 
 ```cpp
 las::zip(vx, vy, vr) 
@@ -240,6 +240,14 @@ vec >>= las::map(thread_num);
 
 <!-- Architecture -->
 ## Architecture
+
+The following figure shows that the user only needs to know the simple skeletons API  and never interacts specifically with the parallelization layers. LAS then instantiates a `TemplateMethod` object with one collection/adapter and one or more skeletons the user chooses. Then, internally, this structure is augmented with proxies from other layers creating a new refined class. It's practically like injecting code in specific parts of the `TemplateMethods` execution method. To make the fusion of skeletons is used a decorator class that extends one skeleton or another skeleton decorator. This class propagates the invocation of its methods to the skeletons ones.
+<img src="docs/images/architecture/las_architecture.svg" width="100%"/>
+
+Utilizing concepts and templates instead of pointers to abstract classes allows the compiler to overcome the indirection created by the latter, allowing the inline of the methods and functors. Wich permits the compiler to make optimizations like loop unroll and vectorization. 
+<p style="background-color:white">
+  <img src="docs/images/architecture/inline.gif" width="100%"/>
+</p>
 
 _For more examples, please refer to the [Documentation](https://vascolleitao.github.io/las)_
 <p align="right">(<a href="#top">back to top</a>)</p>
